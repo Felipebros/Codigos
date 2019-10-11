@@ -14,3 +14,10 @@ sudo apt-get install telegram
 
 ## Passo 5. Este comando abaixo desinstala o Telegram
 sudo apt-get remove telegram && sudo apt-get autoremove
+
+
+# Se os acentos não estão funcionando no Telegram
+## Coloque isto no início do seu atalho, no capo de Comando
+env QT_IM_MODULE=xim
+## Ficando dessa forma
+env QT_IM_MODULE=xim /opt/telegram/telegram -- %u
