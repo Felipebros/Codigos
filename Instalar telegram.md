@@ -1,4 +1,4 @@
-# Instalar telegram no Linux Ubuntu
+# Instalar o Telegram no Linux Ubuntu
 https://www.edivaldobrito.com.br/telegram-no-ubuntu-fedora/
 
 ## Passo 1. Abra o terminal (com o atalho CTRL + ALT + T)
