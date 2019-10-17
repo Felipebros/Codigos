@@ -1,20 +1,32 @@
 # Funcionamento do GIT
 
 ## Para iniciar um GIT
+```sh
 git init
+```
 
 ## Para Adicionar um repositório remoto
+```sh
 add origin https://github.com/Felipebros/QHorario.git
+```
 
 ## Para puxar do servidor GIT
+```sh
 git pull origin master
+```
 
 ## Para fazer commit
+```sh
 git add .
+```
+```sh
 git commit -m "first commit"
+```
 
 ## Para enviar para o servidor GIT
+```sh
 git push -u origin master
+```
 
 
 # Processo de contribuição no GitHub
