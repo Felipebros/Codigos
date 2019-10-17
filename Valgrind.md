@@ -2,3 +2,6 @@
 
 ## Executar Valgrind com mais opções
 valgrind --leak-check=full --track-origins=yes name-of-your-program
+
+## Executar Valgrind com mais opções ainda e com salvamento do log em txt
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./executable
