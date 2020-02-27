@@ -1,26 +1,28 @@
 # Instalar o Telegram no Linux Ubuntu
-https://www.edivaldobrito.com.br/telegram-no-ubuntu-fedora/
 
-## Passo 1. Abra o terminal (com o atalho CTRL + ALT + T)
+## Passo 1. Baixar no site do telegram
+https://desktop.telegram.org/
 
-## Passo 2. Adicione o repositório do telegram com este comando, se ainda não tiver
+## Passo 2. Abra o terminal (com o atalho CTRL + ALT + T)
+
+## Passo 3. Execute o comando abaixo
 ```bash
-sudo add-apt-repository ppa:atareao/telegram
+tar -Jxxvf tsetup.1.9.14.tar.xz
 ```
 
-## Passo 3. Atualize os repositório do gerenciador de pacote
+## Passo 4. Mova para a pasta opt
 ```bash
-sudo apt-get update
+sudo mv Telegram/ /opt/
 ```
 
-## Passo 4. Este comando instala o Telegram
+## Passo 5. Rntre na pasta do Telegram
 ```bash
-sudo apt-get install telegram
+cd /opt/Telegram/
 ```
 
-## Passo 5. Este comando abaixo desinstala o Telegram
+## Passo 6. Execute o Telegram
 ```bash
-sudo apt-get remove telegram && sudo apt-get autoremove
+./Telegram
 ```
 
 
