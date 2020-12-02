@@ -1,4 +1,4 @@
-name: label WIP checker CI
+name: Label WIP checker CI
 
 on:
   pull_request:
@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@1.0.0-beta
+    - uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.0.0-alpha
