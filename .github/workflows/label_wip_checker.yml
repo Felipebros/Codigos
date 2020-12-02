@@ -1,8 +1,8 @@
 name: label WIP checker CI
 
 on:
-pull_request:
-  types: [labeled, unlabeled, edited, opened, synchronize, reopened]
+  pull_request:
+    types: [labeled, unlabeled, edited, opened, synchronize, reopened]
 
 jobs:
   label-wip-checker-CI:
