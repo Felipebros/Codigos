@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.0.0-alpha
+    - uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.0.1-alpha
