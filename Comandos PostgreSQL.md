@@ -5,4 +5,4 @@ psql -h localhost -U postgres <nome_banco_de_dados>
 ALTER DATABASE <nome_antigo> RENAME TO <novo_nome>;
 
 
-teste
+test
