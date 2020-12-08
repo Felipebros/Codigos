@@ -1,4 +1,7 @@
 name: Label WIP checker CI
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
 
 on:
   pull_request:
@@ -14,3 +17,4 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WIP_LABELS: "DO NOT MERGE"
+          APPROVALS: "2"
