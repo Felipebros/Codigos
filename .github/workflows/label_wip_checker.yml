@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: WIP blocker with labels in PR
-      uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.4.0-alpha
+      uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.4.1-alpha
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WIP_LABELS: "DO NOT MERGE"
