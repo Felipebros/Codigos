@@ -1,8 +1,6 @@
 name: Test Label WIP checker CI
 
 on:
-  pull_request:
-    types: [opened]
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
@@ -13,9 +11,6 @@ on:
         default: 'World'
         # Input has to be provided for the workflow to run
         required: true
-  push:
-    branches:
-      - develop
 
 jobs:
   test-label-wip-checker-CI:
