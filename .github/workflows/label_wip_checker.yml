@@ -1,7 +1,4 @@
 name: Label WIP checker CI
-branding:
-  icon: 'tag'
-  color: 'gray-dark'
 
 on:
   pull_request:
