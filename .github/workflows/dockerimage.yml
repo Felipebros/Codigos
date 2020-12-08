@@ -1,12 +1,6 @@
 name: Test Label WIP checker CI
 
-on:
-  pull_request:
-    types: [opened]
-  workflow_dispatch:
-  push:
-    branches:
-      - develop
+on: [workflow_dispatch]
 
 jobs:
   test-label-wip-checker-CI:
