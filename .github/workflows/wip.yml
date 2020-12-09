@@ -21,6 +21,6 @@ jobs:
     - name: Test WIP blocker with labels in PR
       uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.5.14-alpha
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           WIP_LABELS: "DO NOT MERGE|NEED_REINDEX"
           APPROVALS: "2"
