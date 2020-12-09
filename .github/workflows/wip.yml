@@ -2,7 +2,7 @@ name: Test Label WIP checker CI
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
   workflow_dispatch:
     inputs:
       name:
@@ -19,8 +19,8 @@ jobs:
 
     steps:
     - name: Test WIP blocker with labels in PR
-      uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.5.16-alpha
+      uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.0.0
       env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WIP_LABELS: "DO NOT MERGE|NEED_REINDEX"
           APPROVALS: "2"
