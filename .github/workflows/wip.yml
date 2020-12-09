@@ -10,8 +10,7 @@ on:
         default: 'Manual or automatic execution'
         required: true
   push:
-    branches:
-      - develop
+    branches: [develop, master]
 
 jobs:
   test-label-wip-checker-CI:
