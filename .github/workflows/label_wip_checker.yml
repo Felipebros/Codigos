@@ -15,4 +15,3 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WIP_LABELS: "DO NOT MERGE|NEED_REINDEX"
-          APPROVALS: "2"
