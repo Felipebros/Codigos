@@ -1,0 +1,25 @@
+name: Test Label WIP checker CI
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Manual or automatic execution'
+        default: 'Manual or automatic execution'
+        required: true
+  push:
+    branches: [develop, master]
+
+jobs:
+  test-label-wip-checker-CI:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Test WIP blocker with labels in PR
+      uses: Felipebros/github-action-WIP-blocker-with-labels-in-PR@v1.0.0
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WIP_LABELS: "DO NOT MERGE|NEED_REINDEX"
+          APPROVALS: "2"
