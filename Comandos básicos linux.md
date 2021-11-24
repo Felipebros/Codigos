@@ -116,19 +116,27 @@ chmod -R 777 diretorio
 
 
 deu certo
+
 sudo chmod u=rwx .gitignore 
 
 ## transformar em proprietario
+
 chown www-data:www-data -R /var/www/
+
 chown www-data:usuario -R /var/www/
+
 sudo chown usuario:usuario -R /var/www/
+
 sudo chown felipe:felipe -R /var/www/
+
 chown www-data:usuario -R /var/www/
+
 # Permissão
+
 sudo chmod -R 774 /var/www/html/
 
-
 # Montar pasta para wine acessar normalmente para ir no wine e criar mapeamento de rede, mesmo assim não funcionou ficou somente leitura
+
 Monta uma pasta de acesso de uma pasta de rede no linux
 ```bash
 sudo mount -t cifs -o username=felipe,password=123,uid=1000,gid=1000,file_mode=0777,dir_mode=0777,nounix //192.168.100.24/c /mnt/share/sgbr-rede
