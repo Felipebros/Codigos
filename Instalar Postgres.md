@@ -29,3 +29,7 @@ Adicionar essa linha no final do arquivo `pg_hba.conf`
 ```bash
 host    all             all             0.0.0.0/0               md5
 ```
+
+```bash
+sudo service postgresql restart
+```
