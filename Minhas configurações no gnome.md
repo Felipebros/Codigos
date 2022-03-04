@@ -1,9 +1,15 @@
 # Configurações
 ```bash
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Super><Shift>Page_Up']"
+```
+```bash
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down "['<Super><Shift>Page_Down']"
 ```
 ```bash
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Super><Shift>Page_Up']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "[]"
+```
+```bash
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "[]"
 ```
 ```bash
 gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Alt>F1']"
