@@ -3,7 +3,7 @@
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down "['<Super><Shift>Page_Down']"
 ```
 ```bash
-gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Alt>F1', '<Super_L>']"
+gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Alt>F1']"
 ```
 ## Para encontrar quais comandos estão utilizando os atalhos
 ```bash
