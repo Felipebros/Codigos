@@ -5,3 +5,8 @@ Para encontrar quais comandos estão utilizando os atalhos
 ```bash
 gsettings list-recursively | grep -i '<Control><Shift><Alt>'
 ```
+Para resetar um atalho de um comando
+```bash
+gsettings reset org.gnome.desktop.wm.keybindings panel-main-menu
+```
+ 
