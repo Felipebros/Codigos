@@ -10,7 +10,3 @@ nvm install --lts
 ```bash
 npm install --global yarn
 ```
-
-```bash
-npm install --global yarn
-```
