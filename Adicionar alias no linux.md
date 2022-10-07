@@ -1,4 +1,4 @@
-Adicionar alias linux, inserir no arquivo .bash_alias
+Adicionar alias no linux, inserir no arquivo `.bash_alias`
 
 ```bash
 alias add='git add'
