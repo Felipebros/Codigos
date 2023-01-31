@@ -1,4 +1,4 @@
-##Instalação funcionando 7.3
+## Instalação funcionando 7.3
 sudo apt install python-software-properties
 sudo add-apt-repository ppa:ondrej/php
 sudo apt update
@@ -28,7 +28,7 @@ sudo a2dismod php7.3
 sudo a2enmod php7.4
 sudo systemctl restart apache2
 
-##Instalação funcionando 8.1
+## Instalação funcionando 8.1
 sudo apt install php8.1-pgsql php8.1-gd php8.1-intl php8.1-xsl php8.1-mbstring php8.1-curl php8.1-cli php8.1-xml php8.1-opcache php8.1-gmp php8.1-zip php8.1-mysql
 sudo apt install php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-intl -y
 sudo update-alternatives --set php /usr/bin/php8.1
@@ -37,14 +37,14 @@ sudo a2dismod php7.4
 sudo a2enmod php8.1
 sudo systemctl restart apache2
 
-##Instalação funcionando 7.0
+## Instalação funcionando 7.0
 sudo apt-get remove apache2 php7.0
 sudo apt-get update
 sudo apt-get install apache2
 sudo apt-get install php7.0 php7.0-mcrypt php7.0-pgsql php7.0-gd php7.0-intl php7.0-xsl php7.0-mbstring
 sudo apt-get install php libapache2-mod-php
 sudo nano /etc/apache2/apache2.conf
-# criar na última linha se não tiver para
+# Criar na última linha se não tiver para
 serverName localhost
 sudo systemctl restart apache2
 sudo service apache2 restart
