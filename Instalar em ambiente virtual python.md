@@ -20,10 +20,12 @@ python -m pip install --upgrade pip
 pip install scrapy
 ```
 
+## Para exportar as bibliotecas para um arquivo
 ```bash
 pip freeze > requirements.txt
 ```
 
+## Para instalar as bibliotecas a partir de um arquivo
 ```bash
 pip install -r requirements.txt
 ```
