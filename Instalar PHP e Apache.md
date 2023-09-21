@@ -88,6 +88,26 @@ sudo a2enmod php8.1
 sudo systemctl restart apache2
 ```
 
+## Instalação funcionando 8.2
+```bash
+sudo apt install php8.2-pgsql php8.2-gd php8.2-intl php8.2-xsl php8.2-mbstring php8.2-curl php8.2-cli php8.2-xml php8.2-opcache php8.2-gmp php8.2-zip php8.2-mysql php8.2-common php8.2-xmlrpc php8.2-imagick php8.2-dev php8.2-imap php8.2-soap -y
+```
+```bash
+sudo update-alternatives --set php /usr/bin/php8.1
+```
+```bash
+sudo apt install libapache2-mod-php8.1
+```
+```bash
+sudo a2dismod php7.4
+```
+```bash
+sudo a2enmod php8.1
+```
+```bash
+sudo systemctl restart apache2
+```
+
 ## Instalação funcionando 7.0
 ```bash
 sudo apt-get remove apache2 php7.0
