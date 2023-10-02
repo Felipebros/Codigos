@@ -1,3 +1,23 @@
+## Instalação funcionando 8.2
+```bash
+sudo apt install php8.2-pgsql php8.2-gd php8.2-intl php8.2-xsl php8.2-mbstring php8.2-curl php8.2-cli php8.2-xml php8.2-opcache php8.2-gmp php8.2-zip php8.2-mysql php8.2-common php8.2-xmlrpc php8.2-imagick php8.2-dev php8.2-imap php8.2-soap php8.2-pcov php8.2-xdebug -y
+```
+```bash
+sudo update-alternatives --set php /usr/bin/php8.1
+```
+```bash
+sudo apt install libapache2-mod-php8.1
+```
+```bash
+sudo a2dismod php7.4
+```
+```bash
+sudo a2enmod php8.1
+```
+```bash
+sudo systemctl restart apache2
+```
+
 ## Instalação funcionando 7.3
 ```bash
 sudo apt install python-software-properties
@@ -11,6 +31,7 @@ sudo apt update
 ```bash
 sudo apt install php7.3
 ```
+
 # sudo apt install php7.3 e [TAB] para listar os componentes
 ```bash
 sudo apt install php7.3-pgsql php7.3-gd php7.3-intl php7.3-xsl php7.3-mbstring php7.3-curl php7.3-cli php7.3-json php7.3-xml php7.3-opcache php7.3-gmp php7.3-zip php7.3-mysql
@@ -27,10 +48,12 @@ sudo a2enmod php7.3
 ```bash
 sudo systemctl restart apache2
 ```
+
 # encontrar arquivo de configuração do php
 ```bash
 php -i | grep "Loaded Configuration File"
 ```
+
 ## PHP.ini aumentar limite de inputs
 # Valor padrão max_input_vars = 1000
 ```bash
@@ -71,26 +94,6 @@ sudo apt install php8.1-pgsql php8.1-gd php8.1-intl php8.1-xsl php8.1-mbstring p
 ```
 ```bash
 sudo apt install php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-intl -y
-```
-```bash
-sudo update-alternatives --set php /usr/bin/php8.1
-```
-```bash
-sudo apt install libapache2-mod-php8.1
-```
-```bash
-sudo a2dismod php7.4
-```
-```bash
-sudo a2enmod php8.1
-```
-```bash
-sudo systemctl restart apache2
-```
-
-## Instalação funcionando 8.2
-```bash
-sudo apt install php8.2-pgsql php8.2-gd php8.2-intl php8.2-xsl php8.2-mbstring php8.2-curl php8.2-cli php8.2-xml php8.2-opcache php8.2-gmp php8.2-zip php8.2-mysql php8.2-common php8.2-xmlrpc php8.2-imagick php8.2-dev php8.2-imap php8.2-soap -y
 ```
 ```bash
 sudo update-alternatives --set php /usr/bin/php8.1
