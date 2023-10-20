@@ -6,10 +6,14 @@ python3 -m venv .venv
 ```
 
 ## Para ativar e começar a usar o ambiente virtual
+### No Linux
 ```bash
 source .venv/bin/activate
 ```
-
+### No windows
+```bash
+source .venv/Scripts/activate
+```
 ## Atualize o PIP que esta instalado dentro desse novo ambiente virtual
 ```bash
 python -m pip install --upgrade pip
