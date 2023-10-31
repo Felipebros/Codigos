@@ -14,7 +14,7 @@ source .venv/bin/activate
 ```bash
 source .venv/Scripts/activate
 ```
-## Atualize o PIP que esta instalado dentro desse novo ambiente virtual
+## Atualize o PIP que está instalado dentro desse novo ambiente virtual
 ```bash
 python -m pip install --upgrade pip
 ```
