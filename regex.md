@@ -4,3 +4,8 @@
 ```bash
 ^((?!palavra).)*$
 ```
+
+## Encontrar a primeira palavra de uma string
+```bash
+^.*?(palavra)
+```
