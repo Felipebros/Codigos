@@ -1,4 +1,3 @@
-grep -v '^$' file.txt | sort | uniq
 # Grep
 
 ## Contar quantidade de linhas de um arquivo que contenham essa string
