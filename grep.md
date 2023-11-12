@@ -12,5 +12,11 @@ grep -o 'prod\.ERROR.*' laravel-2023-11-01.log | less
 
 ## Gerar um arquivo de texto com as linhas únicas e ordenadas alfanumericamente
 ```bash
-grep -o 'prod\.ERROR.*' laravel-2023-11-01.log | uniq | sort > teste.log
+grep -o 'prod\.ERROR.*' laravel-2023-11-01.log | sort | uniq > teste.log
+```
+
+## Pesquisar com grep com case insensitive (sem distinção entre maiúsculas e minúsculas)
+> Para ser uma linha única, sem repetição, primeiro precisa ordenar, para depois usar o programa uniq
+```bash
+grep -o -i 'google \w*' BrowserHistory.json | sort | uniq | less
 ```
