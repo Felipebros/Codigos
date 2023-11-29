@@ -20,3 +20,8 @@ grep -o 'prod\.ERROR.*' laravel-2023-11-01.log | sort | uniq > teste.log
 ```bash
 grep -o -i 'google \w*' BrowserHistory.json | sort | uniq | less
 ```
+
+## Grep pesquisando com cláusula 'OU'
+```bash
+grep -o -e 'palavra 1' -e 'palavra 2' -e 'palavra 3' arquivo.txt | sort | uniq
+```
