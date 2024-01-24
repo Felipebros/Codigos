@@ -1,33 +1,53 @@
 # Funcionamento do GIT
 
 ## Para iniciar um GIT
-```sh
+```bash
 git init
 ```
 
 ## Para Adicionar um repositório remoto
-```sh
-add origin https://github.com/Felipebros/QHorario.git
+```bash
+git remote add origin git@github.com:Felipebros/teste123.git
+```
+
+## Para Adicionar um repositório remoto (método antigo)
+```bash
+add origin https://github.com/Felipebros/teste123.git
 ```
 
 ## Para puxar do servidor GIT
-```sh
+```bash
 git pull origin master
 ```
 
 ## Para fazer commit
-```sh
+```bash
 git add .
 ```
-```sh
+```bash
 git commit -m "first commit"
 ```
 
-## Para enviar para o servidor GIT
-```sh
-git push -u origin master
+## Alterar nome da branch principal de master para main
+```bash
+git branch -M main
 ```
 
+## Enviar push para o servidor GIT
+```bash
+git push -u origin main
+```
+
+## Exemplo 2 de criar git e subir para o repositório
+```bash
+git init
+echo "# teste123" >> README.md
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:Felipebros/teste123.git
+git push -u origin main
+```
 
 # Processo de contribuição no GitHub
 1. Fork do projeto para o seu usuário.
