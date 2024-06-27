@@ -23,6 +23,11 @@ docker rmi -f <image_id>    # Forces removal of image even if it is referenced i
                             # Will still fail if there is a docker container referencing image
 ```
 
+Subir docker com yml personalizado:
+```bash
+docker compose -f docker-compose-dev.yml up -d --force-recreate
+```
+
 ## Instalar o AWS CLI e autorizar usuário docker
 * Instale o AWS CLI
     https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
