@@ -70,7 +70,10 @@ sudo service apache2 restart
 ## Instalação funcionando 7.4
 (https://www.cloudbooklet.com/upgrade-php-version-to-php-7-4-on-ubuntu/)
 ```bash
-sudo apt install software-properties-commonsudo add-apt-repository ppa:ondrej/phpsudo
+sudo apt install software-properties-common
+```
+```bash
+sudo add-apt-repository ppa:ondrej/phpsudo
 ```
 ```bash
 apt update
