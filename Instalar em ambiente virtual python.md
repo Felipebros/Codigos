@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ```
 
 
-# Ou uma versão nova usando uma biblioteca
+# Ou uma nova versão usando uma biblioteca
 
 ## Para executar o projeto
 
