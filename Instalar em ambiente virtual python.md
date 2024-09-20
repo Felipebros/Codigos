@@ -33,3 +33,51 @@ pip freeze > requirements.txt
 ```bash
 pip install -r requirements.txt
 ```
+
+
+# Ou uma versão nova usando uma biblioteca
+
+## Para executar o projeto
+
+Instalar o virtualenv
+```bash
+sudo apt install python3-virtualenv
+```
+
+Criar um ambiente virtual (Linux/MacOS)
+```bash
+virtualenv venv
+```
+ou
+```bash
+virtualenv -p python3 venv
+```
+
+Criar um ambiente virtual (Windows)
+```bash
+python -m virtualenv venv
+```
+
+Ativar o ambiente virtual venv (Linux/MacOS)
+```bash
+. venv/bin/activate
+```
+ou
+```bash
+source venv/bin/activate
+```
+
+Ativar o ambiente virtual venv (Windows)
+```bash
+venv/Scripts/activate
+```
+
+Atualizar o pip
+```bash
+pip install --upgrade pip
+```
+
+Depois de instalar uma nova biblioteca exporte novamente as bibliotecas usadas para o arquivo `requirements.txt`
+```bash
+pip freeze > requirements.txt
+```
