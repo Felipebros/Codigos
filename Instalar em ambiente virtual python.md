@@ -79,3 +79,23 @@ pip install --upgrade pip
 ```bash
 pip freeze > requirements.txt
 ```
+
+# Instalar várias versões do python
+https://github.com/pyenv/pyenv-installer
+
+```bash
+curl https://pyenv.run | bash
+```
+
+## Para adiconar no PATH do linux
+```bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+```
+```bash
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+```
+```bash
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+```
+
+### Feche e abra o seu terminal novamente
