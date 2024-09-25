@@ -101,3 +101,9 @@ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 ```
 
 ### Feche e abra o seu terminal novamente
+
+## Para listar as versões disponíveis para instalação
+
+```bash
+pyenv install -list
+```
