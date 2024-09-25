@@ -107,3 +107,9 @@ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 ```bash
 pyenv install -list
 ```
+
+## Para instalar uma versão em específico
+
+```bash
+pyenv install 3.8.20
+```
