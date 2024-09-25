@@ -88,6 +88,8 @@ curl https://pyenv.run | bash
 ```
 
 ## Para adiconar no PATH do linux
+https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
+
 ```bash
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 ```
