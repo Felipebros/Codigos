@@ -1,11 +1,17 @@
 # Criar e Instalar em um ambiente virtual em python
 
 ## Instale no Ubuntu os programas essenciais para desenvolvimento
+Conjunto de ferramentas necessárias para compilar software.
 ```bash
 sudo apt install build-essential
 ```
+Inclui os arquivos de cabeçalho necessários para compilar extensões Python.
 ```bash
-sudo apt install libpq-dev python3-dev
+sudo apt install python3-dev
+```
+Para interagir com o PostgreSQL.
+```bash
+sudo apt install libpq-dev
 ```
 
 ## Para criar o ambiente virtual em uma pasta
