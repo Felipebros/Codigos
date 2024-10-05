@@ -1,5 +1,13 @@
 # Criar e Instalar em um ambiente virtual em python
 
+## Instale no Ubuntu os programas essenciais para desenvolvimento
+```bash
+sudo apt install build-essential
+```
+```bash
+sudo apt install libpq-dev python3-dev
+```
+
 ## Para criar o ambiente virtual em uma pasta
 ```bash
 python3 -m venv .venv
