@@ -29,3 +29,11 @@ uv add --dev ipython
 ```bash
 uv add --dev ipdb
 ```
+
+## Exemplo de como executar o script na env isolada
+```bash
+uv run python hello.py
+```
+```bash
+uv run python -V
+```
