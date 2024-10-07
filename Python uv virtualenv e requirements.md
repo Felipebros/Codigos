@@ -42,3 +42,14 @@ uv run python hello.py
 ```bash
 uv run python -V
 ```
+
+## Fazer o uv autocomplementar o código
+Para demais shells https://docs.astral.sh/uv/getting-started/installation/#shell-autocompletion
+```bash
+echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
+```
+```bash
+echo 'eval "$(uvx --generate-shell-completion bash)"' >> ~/.bashrc
+```
+Feche e abra novamente o seu shell
+
