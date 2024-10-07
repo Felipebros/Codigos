@@ -8,6 +8,11 @@ https://docs.astral.sh/uv/
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+## Atualizando o uv
+```bash
+uv self update
+```
+
 ## Para iniciar o uv
 Dentro da pasta do projeto
 ```bash
