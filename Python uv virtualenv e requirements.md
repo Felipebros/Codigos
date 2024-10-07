@@ -56,8 +56,8 @@ Feche e abra novamente o seu shell
 ## Versões do Python
 Instalando e gerenciando o próprio Python.
 
-`uv python install`: Instalar versões do Python.  
-`uv python list`: Veja as versões disponíveis do Python.  
-`uv python find`: Encontre uma versão instalada do Python.  
-`uv python pin`: Fixe o projeto atual para usar uma versão específica do Python.  
-`uv python uninstall`: Desinstale uma versão do Python.
+- `uv python install`: Instalar versões do Python.
+-  `uv python list`: Veja as versões disponíveis do Python.
+- `uv python find`: Encontre uma versão instalada do Python.
+- `uv python pin`: Fixe o projeto atual para usar uma versão específica do Python.
+- `uv python uninstall`: Desinstale uma versão do Python.
