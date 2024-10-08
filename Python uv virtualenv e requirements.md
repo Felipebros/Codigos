@@ -19,6 +19,11 @@ Dentro da pasta do projeto
 uv init
 ```
 
+## Para instalar as dependências do requirements migrando da versão antiga para usar somenteo uv
+```bash
+uv pip sync docs/requirements.txt
+```
+
 ## Como adiconar o Django por exemplo
 ```bash
 uv add Django==5.1
