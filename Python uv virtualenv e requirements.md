@@ -24,6 +24,11 @@ uv init
 uv pip sync docs/requirements.txt
 ```
 
+## Se a venv não foi criada no comando `uv init` execute o comando abaixo para criar a venv
+```bash
+uv venv
+```
+
 ## Como adiconar o Django por exemplo
 ```bash
 uv add Django==5.1
