@@ -29,6 +29,14 @@ uv pip sync docs/requirements.txt
 uv venv
 ```
 
+## para instalar pip ou bibliotecas mais antigas
+```bash
+uv pip install pip==23.0.1
+```
+```bash
+uv add setuptools==60.*
+```
+
 ## Como adiconar o Django por exemplo
 ```bash
 uv add Django==5.1
