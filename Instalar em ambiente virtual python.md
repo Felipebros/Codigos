@@ -13,6 +13,10 @@ Para interagir com o PostgreSQL.
 ```bash
 sudo apt install libpq-dev
 ```
+Se ocorrer o erro `ERROR: Failed building wheel for psycopg2`. Instale o clang no seu linux
+```bash
+sudo apt install clang
+```
 
 ## Para criar o ambiente virtual em uma pasta
 ```bash
