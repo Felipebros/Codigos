@@ -22,10 +22,12 @@ Para iniciar com uma versõa definida do python
 ```bash
 uv init -p 3.8
 ```
+
 ## Para instalar as dependências do requirements migrando da versão antiga para usar somenteo uv
 ```bash
 uv add -r requirements.txt
 ```
+
 ### Em caso de erro, adicione essa parte abaixo no seu `pyproject.toml`
 ```bash
 [project.optional-dependencies]
