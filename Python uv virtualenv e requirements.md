@@ -24,6 +24,10 @@ uv init -p 3.8
 ```
 ## Para instalar as dependências do requirements migrando da versão antiga para usar somenteo uv
 ```bash
+uv add -r requirements.txt
+```
+Essa maneira abaixo não atualiza o `pyproject.toml`
+```bash
 uv pip sync docs/requirements.txt
 ```
 
