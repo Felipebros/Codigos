@@ -45,7 +45,7 @@ E depois execute
 uv add -r requirements.txt
 ```
 
-Essa maneira abaixo não atualiza o `pyproject.toml`
+## Ou dessa maneira abaixo, que não atualiza o `pyproject.toml`
 ```bash
 uv pip sync docs/requirements.txt
 ```
