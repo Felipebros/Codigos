@@ -18,7 +18,10 @@ Dentro da pasta do projeto
 ```bash
 uv init
 ```
-
+Para iniciar com uma versõa definida do python
+```bash
+uv init -p 3.8
+```
 ## Para instalar as dependências do requirements migrando da versão antiga para usar somenteo uv
 ```bash
 uv pip sync docs/requirements.txt
