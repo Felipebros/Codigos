@@ -31,6 +31,23 @@ Essa maneira abaixo não atualiza o `pyproject.toml`
 uv pip sync docs/requirements.txt
 ```
 
+Em caso de erro, adicione essa parte abaixo no seu `pyproject.toml`
+```bash
+[project.optional-dependencies]
+build = ["setuptools==56.0.0", "wheel>=0.44.0", "clang"]
+
+[tool.uv]
+no-build-isolation-package = ["django-allauth"]
+```
+Depois execute
+```bash
+uv sync --extra build
+```
+E depois execute
+```bash
+uv add -r requirements.txt
+```
+
 ## Se a venv não foi criada no comando `uv init` execute o comando abaixo para criar a venv
 ```bash
 uv venv
