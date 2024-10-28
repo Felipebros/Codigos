@@ -83,6 +83,10 @@ uv add --dev ipdb
 ```bash
 uv run python hello.py
 ```
+ou simplesmente
+```bash
+uv run hello.py
+```
 ```bash
 uv run python -V
 ```
@@ -105,3 +109,13 @@ Instalando e gerenciando o próprio Python.
 - `uv python find`: Encontre uma versão instalada do Python.
 - `uv python pin`: Fixe o projeto atual para usar uma versão específica do Python.
 - `uv python uninstall`: Desinstale uma versão do Python.
+
+## Para instalar uma ferramenta a ser usada em todo o computador
+```bash
+uv tool install ruff
+```
+
+## Para executar uma ferramenta em qualquer pasta
+```bash
+uvx ruff
+```
