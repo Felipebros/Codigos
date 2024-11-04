@@ -28,6 +28,11 @@ git add .
 git commit -m "first commit"
 ```
 
+## Para listar os nomes dos commits em ordem reversa
+```bash
+git log --pretty=format:"- %s" --reverse
+```
+
 ## Alterar nome da branch principal de master para main
 ```bash
 git branch -M main
