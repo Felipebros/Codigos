@@ -9,3 +9,5 @@
 8. **Alt + B:** Move o cursor uma palavra para trás.
 9. **Alt + F:** Move o cursor uma palavra para frente.
 10. **Ctrl + C:** Interrompe o comando atual.
+11. **Seta para cima/baixo:** Navega pelo histórico de comandos.
+12. **Ctrl + Seta para esquerda/direta:** Move o cursor de palavra em palavra.
