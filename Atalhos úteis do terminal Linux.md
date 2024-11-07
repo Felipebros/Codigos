@@ -1,6 +1,6 @@
 # Atalhos úteis do terminal Linux
-1. **Ctrl + A:** Move o cursor para o início da linha.
-2. **Ctrl + E:** Move o cursor para o final da linha.
+1. **(Ctrl + A)/home:** Move o cursor para o início da linha.
+2. **(Ctrl + E)/end:** Move o cursor para o final da linha.
 3. **Ctrl + K:** Remove tudo à direita do cursor.
 4. **Ctrl + U:** Remove tudo à esquerda do cursor.
 5. **Ctrl + W:** Remove a palavra anterior ao cursor.
