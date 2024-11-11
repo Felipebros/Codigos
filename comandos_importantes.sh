@@ -1,4 +1,4 @@
-tree -if diretório/  # lista os arquivso dessa maneira diretório/pasta/arquivo-teste.txt
+tree -if diretório/  # lista os arquivos dessa maneira diretório/pasta/arquivo-teste.txt
 history -d 23-33  # deleta o histórico de comando do 4 ao 6 depois disso precisa executar history -w para salvar
 history -w  # salva o histórico de comandos alterados
 sed -i '12,22d' ~/.bash_history
