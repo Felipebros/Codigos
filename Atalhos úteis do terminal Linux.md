@@ -5,7 +5,8 @@
 4. **Ctrl + U:** Remove tudo à esquerda do cursor.
 5. **Ctrl + W:** Remove a palavra anterior ao cursor.
 6. **Ctrl + R:** Inicia a busca reversa no histórico de comandos.
-7. **Ctrl + L:** Limpa a tela do terminal.
+7. **Ctrl + S:** Inicia a busca histórico de comandos em ordem cronológica.
+8. **Ctrl + L:** Limpa a tela do terminal.
 12. **Ctrl + Seta para esquerda/direta:** Move o cursor uma palavra para trás ou para frente.
 8. **Alt + B:** Move o cursor uma palavra para trás.
 9. **Alt + F:** Move o cursor uma palavra para frente.
