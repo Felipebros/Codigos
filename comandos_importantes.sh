@@ -2,7 +2,7 @@ tree -if diretório/  # lista os arquivos dessa maneira diretório/pasta/arquivo
 history -d 23-33  # deleta o histórico de comando do 4 ao 6 depois disso precisa executar history -w para salvar
 history -w  # salva o histórico de comandos alterados
 sed -i '12,22d' ~/.bash_history
-git log --pretty=format:"- %s" --reverse | grep change  # retorna uma lista de commits do mais antigo para o mais novo
+git log --pretty=format:"- %s" --reverse  # retorna uma lista de commits do mais antigo para o mais novo
 sudo apt update; sudo apt upgrade  # procura e aplica novas atualizações
 w3m https://whatismyipaddress.com/  # meuip
 w3m https://meuip.com.br/  # meuip2
