@@ -21,7 +21,7 @@
 <kbd>o</kbd> = muda a ordem de exibição do arquivos, pode ser por ordem alfabética, tamanho, etc.  
 <kbd>z</kbd> = muda algumas configurações internas do programa, tais como: mouse, mostrar arquivos ocultos, etc...  
 <kbd>z</kbd>+<kbd>h</kbd> = mostra arquivos ocultos  
-<kbd>espaço</kbd> = seleciona o arquivo
+<kbd>espaço</kbd> = seleciona o arquivo  
 <kbd>t</kbd> = marca o arquivo para determinadas operações  
 <kbd>c</kbd>+<kbd>w</kbd> = renomeia o arquivo selecionado  
 <kbd>/</kbd> = pesquisa de arquivos  
