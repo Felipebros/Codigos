@@ -16,7 +16,7 @@
 
 ## A manipulação de arquivos é feita com as seguintes combinações de teclas:
 <kbd>i</kbd> = mostra o conteúdo do arquivo  
-<kbd>l</kbd> ou E = abre o arquivo  
+<kbd>l</kbd> ou <kbd>E</kbd> = abre o arquivo  
 <kbd>r</kbd> = você escolhe o programa para abrir o arquivo  
 <kbd>o</kbd> = muda a ordem de exibição do arquivos, pode ser por ordem alfabética, tamanho, etc.  
 <kbd>z</kbd> = muda algumas configurações internas do programa, tais como: mouse, mostrar arquivos ocultos, etc...  
