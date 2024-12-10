@@ -122,7 +122,7 @@ if ! shopt -oq posix; then
 fi
 
 # show git branch
-export PS1='\[\033[1;32m\]\u@\h\[\033[01;34m\] \w\[\033[0;32m\] $(__git_ps1 "(%s)")\[\033[0;37m\]$(date +%X)\[\033[0m\]$\[\033[00m\] '
+export PS1='\[\e]0;${PWD##*/}\a\]\[\033[1;32m\]\u@\h\[\033[01;34m\] \w\[\033[0;32m\] $(__git_ps1 "(%s)")\[\033[0;37m\]$(date +%X)\[\033[0m\]$\[\033[00m\] '
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
