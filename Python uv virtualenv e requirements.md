@@ -119,3 +119,9 @@ uv tool install ruff
 ```bash
 uvx ruff
 ```
+
+## Para exportar para o requirements.txt
+```bash
+uv pip freeze > requirements.txt
+```
+
