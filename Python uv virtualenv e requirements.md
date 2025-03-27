@@ -125,3 +125,15 @@ uvx ruff
 uv pip freeze > requirements.txt
 ```
 
+## Para atualizar a versão do python para uma env já existente
+1. Altere a versão nos arquivos `pyproject.toml` e `.python-version`
+2. Isso deleta e cria uma nova `.venv/` com a nova versão:
+```bash
+uv sync
+```
+(Geralmente não executar) Se necessário reinstale as dependências do projeto
+```bash
+uv pip install -e .
+```
+
+
