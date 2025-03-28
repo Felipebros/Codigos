@@ -8,6 +8,16 @@ https://docs.astral.sh/uv/
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+## Fazer o uv autocomplementar o código
+Para demais shells https://docs.astral.sh/uv/getting-started/installation/#shell-autocompletion
+```bash
+echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
+```
+```bash
+echo 'eval "$(uvx --generate-shell-completion bash)"' >> ~/.bashrc
+```
+Feche e abra novamente o seu shell
+
 ## Atualizando o uv
 ```bash
 uv self update
@@ -90,16 +100,6 @@ uv run hello.py
 ```bash
 uv run python -V
 ```
-
-## Fazer o uv autocomplementar o código
-Para demais shells https://docs.astral.sh/uv/getting-started/installation/#shell-autocompletion
-```bash
-echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc
-```
-```bash
-echo 'eval "$(uvx --generate-shell-completion bash)"' >> ~/.bashrc
-```
-Feche e abra novamente o seu shell
 
 ## Versões do Python
 Instalando e gerenciando o próprio Python.
