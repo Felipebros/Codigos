@@ -18,7 +18,7 @@
         var inputLista1 = document.getElementById("lista1");
         var inputLista2 = document.getElementById("lista2");
         function compararListas() {
-            var lista1 = inputLista1.value.split("\n").filter(Boolean);
+            var lista1 = inputLista1.value;
             const novoTexto = lista1.replace(/\s+/g, '==');
             document.getElementById("resultado").value = novoTexto;
         }
