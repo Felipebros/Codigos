@@ -15,6 +15,7 @@ Este repositório é utilizado para reunir códigos de linha de comando, scripts
 #### [dns.md](./dns.md)
 #### [Extensões VSCode.txt](Extensões%20VSCode.txt)
 #### [extrair_xpath_no_chrome.js](extrair_xpath_no_chrome.js)
+#### [gerar-requirements-python.md](gerar-requirements-python.md)
 #### [GIT.md](GIT.md)
 #### [grep.md](grep.md)
 #### [Instalar docker compose.md](Instalar%20docker%20compose.md)
