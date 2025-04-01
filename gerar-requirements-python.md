@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<body>
+<div>
     <h2>Gerar requirements Python feito em JavaScript</h2>
 
     <p>Insira a lista no textarea abaixo e clique no botão para ver o resultado.</p>
@@ -27,6 +24,4 @@
         inputEntrada.addEventListener("input", chamarFuncao);
     </script>
 
-</body>
-
-</html>
+</div>
