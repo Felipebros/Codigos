@@ -1,12 +1,12 @@
 # DNS
 Segue abaixo uma lista de servidores DNS, se você estiver com algum tipo de problema com a internet, trocando o DNS do seu equipamento talvez a internet volte a funcionar normalmente.
 
-1. [DNS do Google](#DNS-do-Google)
-2. [DNS da Cloudflare](#DNS-da-Cloudflare)
-3. [DNS da OpenDNS](#DNS-da-OpenDNS)
-4. [DNS da QUAD9](#DNS-da-QUAD9)
-5. [DNS do AdGuard DNS](#DNS-do-AdGuard-DNS)
-6. [DNS da Algar](#DNS-da-Algar)
+1. [DNS do Google](#dns-do-google)
+2. [DNS da Cloudflare](#dns-da-cloudflare)
+3. [DNS da OpenDNS](#dns-da-opendns)
+4. [DNS da QUAD9](#dns-da-quad9)
+5. [DNS do AdGuard DNS](#dns-do-adguard-dns)
+6. [DNS da Algar](#dns-da-algar)
 
 ## DNS do Google
 ### DNS IPv4:
