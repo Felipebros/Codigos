@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html>
+<h2>Gerar requirements Python feito em JavaScript</h2>
 
-<body>
+<p>Insira a lista no textarea abaixo e clique no botão para ver o resultado.</p>
 
-    <h2>Gerar requirements Python feito em JavaScript</h2>
+<textarea id="lista1" rows="20" cols="35"></textarea>
 
-    <p>Insira a lista no textarea abaixo e clique no botão para ver o resultado.</p>
+<button onclick="chamarFuncao()">Gerar requirements Python</button>
 
-    <textarea id="lista1" rows="20" cols="30"></textarea>
+<textarea id="resultado" rows="20" cols="35"></textarea>
+<span id="contador3"></span>
 
-    <button onclick="compararListas()">Gerar requirements Python</button>
+<script>
+    function substituirEspacos(lista1) {
+        var novoTexto = lista1.replace(/[^\S\n]+/g, '==');
+        return novoTexto
+    }
 
-    <textarea id="resultado" rows="20" cols="30"></textarea>
-    <span id="contador3"></span>
-
-    <script>
-        var inputLista1 = document.getElementById("lista1");
-        var inputLista2 = document.getElementById("lista2");
-        function compararListas() {
-            var lista1 = inputLista1.value;
-            const novoTexto = lista1.replace(/\s+/g, '==');
-            document.getElementById("resultado").value = novoTexto;
-        }
-        inputLista1.addEventListener("input", compararListas);
-    </script>
-
-</body>
-
-</html>
+    const inputEntrada = document.getElementById("lista1");
+    function chamarFuncao() {
+        saida = substituirEspacos(inputEntrada.value)
+        document.getElementById("resultado").value = saida;
+    }
+    inputEntrada.addEventListener("input", chamarFuncao);
+</script>
