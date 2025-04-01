@@ -1,6 +1,6 @@
 # Códigos
 
-Este repositório é utilizado para reunir códigos de linhas de comando, de instalação de programas entre outros
+Este repositório é utilizado para reunir códigos de linha de comando, scripts de instalação de programas, miniaplicativos úteis, entre outros.
 
 .  
 ├── Adicionar alias no linux.md  
