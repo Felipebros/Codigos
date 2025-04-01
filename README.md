@@ -10,9 +10,9 @@ Este repositório é utilizado para reunir códigos de linha de comando, scripts
 #### Atalhos úteis do terminal Linux.md  
 #### Comandos básicos linux.md  
 #### comandos_importantes.sh  
-#### Comandos PostgreSQL.md  
+#### [Comandos PostgreSQL.md](./Comandos%20PostgreSQL.md)
 #### Configurações PC máquina.md  
-#### [dns.md](./dns.md)  
+#### [dns.md](./dns.md)
 #### Extensões VSCode.txt  
 #### extrair_xpath_no_chrome.js  
 #### GIT.md  
