@@ -24,7 +24,7 @@ Este repositório é utilizado para reunir códigos de linha de comando, scripts
 #### [Instalar Java.md](Instalar%20Java.md)
 #### [Instalar nvm, node.js, npm e yarn.md](Instalar%20nvm,%20node.js,%20npm%20e%20yarn.md)
 #### [Instalar pgAdmin 4.md](Instalar%20pgAdmin%204.md)
-#### [Instalar PHP e Apache.md](Instalar%20PHP%20e Apache.md)
+#### [Instalar PHP e Apache.md](Instalar%20PHP%20e%20Apache.md)
 #### [Instalar Postgres.md](Instalar%20Postgres.md)
 #### [Instalar telegram.md](Instalar%20telegram.md)
 #### [LICENSE](LICENSE)
