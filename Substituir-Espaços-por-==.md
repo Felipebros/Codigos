@@ -1,13 +1,13 @@
 [https://felipebros.github.io/Codigos/gerar-requirements-python.html](https://felipebros.github.io/Codigos/gerar-requirements-python.html)
 
 <div>
-    <h2>Gerar requirements Python feito em JavaScript</h2>
+    <h2>Substituir Espaços por == feito em JavaScript</h2>
 
     <p>Insira a lista no textarea abaixo e clique no botão para ver o resultado.</p>
 
     <textarea id="lista1" rows="20" cols="35"></textarea>
 
-    <button onclick="chamarFuncao()">Gerar requirements Python</button>
+    <button onclick="chamarFuncao()">Substituir Espaços por ==</button>
 
     <textarea id="resultado" rows="20" cols="35"></textarea>
     <span id="contador3"></span>
