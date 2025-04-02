@@ -12,6 +12,7 @@ Este repositório é utilizado para reunir códigos de linha de comando, scripts
 #### [comandos_importantes.sh](./comandos_importantes.sh)
 #### [Comandos PostgreSQL.md](./Comandos%20PostgreSQL.md)
 #### [Configurações PC máquina.md](./Configurações%20PC%20máquina.md)
+#### [converte_para_snake_case.md](./converte_para_snake_case.md)
 #### [dns.md](./dns.md)
 #### [Extensões VSCode.txt](./Extensões%20VSCode.txt)
 #### [extrair_xpath_no_chrome.js](./extrair_xpath_no_chrome.js)
