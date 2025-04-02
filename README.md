@@ -29,7 +29,7 @@ Este repositório é utilizado para reunir códigos de linha de comando, scripts
 #### [LICENSE](./LICENSE)
 #### [Listar todos arquivos pasta e subpasta.bat](./Listar%20todos%20arquivos%20pasta%20e%20subpasta.bat)
 #### [Minhas configurações no gnome.md](./Minhas%20configurações%20no%20gnome.md)
-#### [Mostrar nome da branch e horas no terminal.md](./Mostrar%20nome%20da%20branch%20e%20horas%20no%20terminal.md)
+#### [mostrar_nome_da_branch_e_horas_no_terminal.md](./mostrar_nome_da_branch_e_horas_no_terminal.md)
 #### [ordem merge de deploy.md](./ordem%20merge%20de%20deploy.md)
 #### [Pesquisar e contar resultados em um arquivo.md](./Pesquisar%20e%20contar%20resultados%20em%20um%20arquivo.md)
 #### [printar_query_sql_django.md](./printar_query_sql_django.md)
