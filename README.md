@@ -2,6 +2,8 @@
 
 Este repositório é utilizado para reunir códigos de linha de comando, scripts de instalação de programas, miniaplicativos úteis, entre outros.
 
+Repositório [https://github.com/Felipebros/Codigos](https://github.com/Felipebros/Codigos)
+
 Site https://felipebros.github.io/Codigos/
 
 ---
