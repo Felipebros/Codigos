@@ -10,6 +10,7 @@ Site https://felipebros.github.io/Codigos/
 #### [Alterar pasta padrão apache.md](./Alterar%20pasta%20padrão%20apache.md)
 #### [Atalhos úteis do ranger.md](./Atalhos%20úteis%20do%20ranger.md)
 #### [Atalhos úteis do terminal Linux.md](./Atalhos%20úteis%20do%20terminal%20Linux.md)
+#### [calculadora_porcentagem.html](./calculadora_porcentagem.html)
 #### [Comandos básicos linux.md](./Comandos%20básicos%20linux.md)
 #### [comandos_importantes.sh](./comandos_importantes.sh)
 #### [Comandos PostgreSQL.md](./Comandos%20PostgreSQL.md)
