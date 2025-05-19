@@ -1,6 +1,6 @@
-Repositório: [./src/calculadora_porcentagem2.md](./src/calculadora_porcentagem2.md)
+Site: [./src/calculadora_porcentagem2.md](./src/calculadora_porcentagem2.md)
 
-Site: [https://github.com/Felipebros/Codigos/blob/main/src/calculadora_porcentagem2.md](https://github.com/Felipebros/Codigos/blob/main/src/calculadora_porcentagem2.md)
+Repositório: [https://github.com/Felipebros/Codigos/blob/main/src/calculadora_porcentagem2.md](https://github.com/Felipebros/Codigos/blob/main/src/calculadora_porcentagem2.md)
 
 <!DOCTYPE html>
 <html lang="pt-br">
