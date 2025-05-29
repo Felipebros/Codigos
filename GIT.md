@@ -57,7 +57,47 @@ git push -u origin main
 # Processo de contribuição no GitHub
 1. Fork do projeto para o seu usuário.
 2. Clone do projeto forkado na sua máquina.
-3. Taca-le pau ..
+3. Faça seus commits na sua branch.
 4. Atualização do seu projeto com o projeto original.
 5. Commitar e enviar suas alterações para o seu GitHub.
 6. Abrir um pull request para o projeto original.
+
+# Configurações do GIT
+
+## Listar configurações
+```bash
+git config -l
+```
+## Configurar nome do usuário para o repositório atual
+```bash
+git config user.name "Felipe Soares Barbosa Silveira"
+```
+## Configurar email do usuário para o repositório atual
+```bash
+git config user.email "felipeiturama@gmail.com"
+```
+## Configurar nome do usuário para todos os repositórios
+```bash
+git config user.name "Felipe Soares Barbosa Silveira" --global
+```
+## Configurar email do usuário para todos os repositórios
+```bash
+git config user.email "felipeiturama@gmail.com" --global
+```
+
+## Configurando outra chave ssh para ser usada durante o clone
+```bash
+git clone -c core.sshCommand="ssh -i ~/.ssh/id_ed25519.nome_empresa" git@github.com:Felipebros/Codigos.git
+```
+## Listar configurações
+```bash
+git config -l
+```
+## Configurando outra chave ssh para ser usada depois de clonar
+```bash
+git config core.sshCommand "ssh -i ~/.ssh/id_ed25519.nome_empresa -o 'IdentitiesOnly yes'
+```
+## Removendo a configuração da chave ssh a ser utilizada no repositório
+```bash
+git config --unset-all core.sshcommand
+```
