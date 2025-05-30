@@ -78,6 +78,11 @@ uv add setuptools==60.*
 uv add Django==5.1
 ```
 
+## Para listar
+```bash
+uv pip list
+```
+
 ## Instalar bibliotecas de desenvolvimento
 ```bash
 uv add --dev ruff
