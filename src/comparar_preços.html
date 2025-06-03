@@ -160,8 +160,8 @@
             border-radius: 5px;
         }
         .product-row .simulated-price {
-             color: #6f42c1; /* Cor diferente para o valor simulado */
-             background-color: #f3eafa;
+            color: #6f42c1; /* Cor diferente para o valor simulado */
+            background-color: #f3eafa;
         }
 
 
@@ -305,7 +305,7 @@
                 width: 100%;
             }
             /* Em telas menores, o min-width de 200px pode ser muito grande.
-               Podemos remover ou ajustar para que o campo se adapte melhor. */
+                Podemos remover ou ajustar para que o campo se adapte melhor. */
             .product-row input[type="text"] {
                 min-width: unset; /* Permite que o campo ocupe o espaço disponível */
             }
@@ -411,20 +411,6 @@
                 return value.toLocaleString('pt-BR', options);
             };
 
-            // Função para converter a unidade para uma base comum (gramas para comparação)
-            const convertUnitToGrams = (unit, customValue) => {
-                switch (unit) {
-                    case 'kg':
-                        return 1000;
-                    case 'gram':
-                        return 1;
-                    case 'custom':
-                        return customValue;
-                    default:
-                        return 0;
-                }
-            };
-
             // Função para criar uma nova linha de produto
             const createProductRow = () => {
                 productCount++;
@@ -518,9 +504,9 @@
                 };
 
                 // Adicionar listeners para recalcular ao mudar os valores
-                priceInput.addEventListener('input', calculatePrice);
-                quantityInput.addEventListener('input', calculatePrice);
-                customFractionInput.addEventListener('input', calculatePrice);
+                priceInput.addEventListener('input', () => { calculatePrice(); calculateSimulatedPrices(); });
+                quantityInput.addEventListener('input', () => { calculatePrice(); calculateSimulatedPrices(); });
+                customFractionInput.addEventListener('input', () => { calculatePrice(); calculateSimulatedPrices(); });
 
                 unitSelect.addEventListener('change', () => {
                     if (unitSelect.value === 'custom') {
@@ -531,6 +517,7 @@
                         customFractionInput.disabled = true; // Desabilita o campo
                     }
                     calculatePrice();
+                    calculateSimulatedPrices();
                 });
 
                 removeButton.addEventListener('click', () => {
@@ -546,6 +533,8 @@
 
                 // Chamada inicial para calcular o preço
                 calculatePrice();
+                // Chama o cálculo simulado para cada nova linha criada
+                calculateSimulatedPrices();
             };
 
             // Função para calcular e exibir os preços simulados
@@ -575,11 +564,13 @@
                     simulatedPriceSpan.textContent = formatNumberToBRL(simulatedValue, true, 2); // Exibe com 2 casas decimais para o valor simulado
                 });
 
-                if (maxUnitInGrams > 0) {
-                     showMessage(`Valor simulado calculado com base na maior unidade de referência: ${formatNumberToBRL(maxUnitInGrams, false, 2)} unidades.`, 'info');
-                } else {
-                     showMessage('Não foi possível calcular o valor simulado. Verifique os valores de quantidade e fração personalizada.', 'error');
-                }
+                // A mensagem de "Valor simulado calculado" só deve aparecer quando o botão é clicado, não a cada input.
+                // Vou remover a chamada showMessage daqui para evitar spam.
+                // if (maxUnitInGrams > 0) {
+                //     showMessage(`Valor simulado calculado com base na maior unidade de referência: ${formatNumberToBRL(maxUnitInGrams, false, 2)} unidades.`, 'info');
+                // } else {
+                //     showMessage('Não foi possível calcular o valor simulado. Verifique os valores de quantidade e fração personalizada.', 'error');
+                // }
             };
 
 
@@ -587,14 +578,14 @@
             for (let i = 0; i < 3; i++) {
                 createProductRow();
             }
-            // Chama o cálculo simulado inicial
+            // Chama o cálculo simulado inicial após todas as linhas serem criadas
             calculateSimulatedPrices();
 
 
             // Listener para o botão de adicionar produto
             addProductBtn.addEventListener('click', () => {
                 createProductRow();
-                calculateSimulatedPrices(); // Recalcula os valores simulados ao adicionar
+                // calculateSimulatedPrices(); // Já é chamado dentro de createProductRow
                 showMessage('Novo produto adicionado!', 'success');
             });
 
@@ -624,7 +615,23 @@
             });
 
             // Novo Listener para o botão de calcular valor simulado
-            calculateSimulatedButton.addEventListener('click', calculateSimulatedPrices);
+            calculateSimulatedButton.addEventListener('click', () => {
+                calculateSimulatedPrices(); // Garante que a função é executada ao clicar no botão
+                const productRows = Array.from(productList.children);
+                let maxUnitInGrams = 0;
+                productRows.forEach(row => {
+                    const unitInGrams = parseFloat(row.dataset.unitInGrams) || 0;
+                    if (unitInGrams > maxUnitInGrams) {
+                        maxUnitInGrams = unitInGrams;
+                    }
+                });
+
+                if (maxUnitInGrams > 0) {
+                    showMessage(`Valor simulado calculado com base na maior unidade de referência: ${formatNumberToBRL(maxUnitInGrams, false, 2)} unidades.`, 'info');
+                } else {
+                    showMessage('Não foi possível calcular o valor simulado. Verifique os valores de quantidade e fração personalizada.', 'error');
+                }
+            });
 
 
             // Listener para o botão de imprimir
@@ -731,30 +738,21 @@
                 });
 
                 markdownTextarea.value = markdownContent;
-                markdownOutputSection.style.display = 'block'; // Mostra a seção de Markdown
-
-                markdownTextarea.select();
-                navigator.clipboard.writeText(markdownTextarea.value)
-                    .then(() => {
-                        showMessage('Conteúdo Markdown copiado para a área de transferência!', 'success');
-                    })
-                    .catch(err => {
-                        console.error('Erro ao copiar Markdown:', err);
-                        showMessage('Erro ao copiar Markdown. Por favor, copie manualmente.', 'error', 8000);
-                    });
+                markdownOutputSection.style.display = 'block'; // Mostra a seção do Markdown
+                showMessage('Markdown gerado com sucesso!', 'success');
             });
 
-            // Listener para o botão de copiar Markdown (se o usuário fechar e quiser copiar de novo)
+            // Listener para o botão de copiar Markdown
             copyMarkdownBtn.addEventListener('click', () => {
                 markdownTextarea.select();
-                navigator.clipboard.writeText(markdownTextarea.value)
-                    .then(() => {
-                        showMessage('Conteúdo Markdown copiado para a área de transferência!', 'success');
-                    })
-                    .catch(err => {
-                        console.error('Erro ao copiar Markdown:', err);
-                        showMessage('Erro ao copiar Markdown. Por favor, copie manualmente.', 'error', 8000);
-                    });
+                markdownTextarea.setSelectionRange(0, 99999); // Para dispositivos móveis
+                try {
+                    document.execCommand('copy');
+                    showMessage('Conteúdo Markdown copiado para a área de transferência!', 'success');
+                } catch (err) {
+                    console.error('Erro ao copiar Markdown:', err);
+                    showMessage('Erro ao copiar Markdown. Por favor, copie manualmente.', 'error');
+                }
             });
         });
     </script>
