@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Preços</title>
+    <style>
+        /* Estilos CSS embutidos */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .product-row {
+            display: grid;
+            grid-template-columns: 0.5fr 1fr 0.8fr 0.8fr 1.2fr 0.5fr 0.2fr; /* Ajustado para mais colunas */
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-row.highlight-cheapest {
+            border-color: #28a745; /* Cor verde para o mais barato */
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .product-row label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .product-row input[type="text"],
+        .product-row input[type="number"],
+        .product-row select {
+            width: calc(100% - 10px); /* Ajuste para preencher o espaço */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Inclui padding e border no width */
+        }
+
+        .product-row input[type="number"]::-webkit-inner-spin-button,
+        .product-row input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .product-row input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .product-row .fraction-input {
+            display: none; /* Escondido por padrão */
+        }
+
+        .product-row .fraction-input.active {
+            display: block; /* Visível quando ativo */
+        }
+
+        .product-row .price-per-fraction {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 1.1rem;
+            text-align: center;
+            background-color: #eaf6ff;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+            display: inline-block;
+            width: auto;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .add-btn {
+            background-color: #28a745;
+            color: white;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .add-btn:hover {
+            background-color: #218838;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .sort-btn {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .sort-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .print-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .print-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .export-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .export-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .markdown-btn {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+        .markdown-btn:hover {
+            background-color: #5a34a8;
+        }
+
+        .markdown-section {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .markdown-section h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+
+        #markdown-textarea {
+            width: calc(100% - 20px);
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .copy-markdown-btn {
+            background-color: #28a745;
+            color: white;
+            width: auto;
+        }
+
+        .copy-markdown-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Esconde o botão de remover nas 3 primeiras linhas */
+        .product-row:nth-child(-n+3) .remove-product-btn {
+            display: none;
+        }
+
+        .remove-product-btn {
+            background-color: #dc3545;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin-left: auto; /* Alinha à direita */
+        }
+
+        .remove-product-btn:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .product-row {
+                grid-template-columns: 1fr; /* Coluna única em telas menores */
+            }
+            .product-row input[type="text"],
+            .product-row input[type="number"],
+            .product-row select {
+                width: 100%;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Comparador de Preços Inteligente</h1>
+        <div id="product-list">
+            </div>
+        <button id="add-product" class="btn add-btn">Adicionar Produto</button>
+
+        <div class="controls">
+            <button id="sort-by-price" class="btn sort-btn">Ordenar por Preço (Mais Barato)</button>
+            <button id="print-page" class="btn print-btn">Imprimir</button>
+            <button id="export-png-clipboard" class="btn export-btn">Copiar como PNG</button>
+            <button id="export-png-save" class="btn export-btn">Salvar como PNG</button>
+            <button id="export-markdown" class="btn markdown-btn">Gerar Markdown</button>
+        </div>
+
+        <div id="markdown-output" class="markdown-section" style="display: none;">
+            <h2>Conteúdo em Markdown</h2>
+            <textarea id="markdown-textarea" readonly></textarea>
+            <button id="copy-markdown" class="btn copy-markdown-btn">Copiar Markdown</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Código JavaScript embutido
+        document.addEventListener('DOMContentLoaded', () => {
+            const productList = document.getElementById('product-list');
+            const addProductBtn = document.getElementById('add-product');
+            const sortButton = document.getElementById('sort-by-price');
+            const printButton = document.getElementById('print-page');
+            const exportPngClipboardBtn = document.getElementById('export-png-clipboard');
+            const exportPngSaveBtn = document.getElementById('export-png-save');
+            const exportMarkdownBtn = document.getElementById('export-markdown');
+            const markdownOutputSection = document.getElementById('markdown-output');
+            const markdownTextarea = document.getElementById('markdown-textarea');
+            const copyMarkdownBtn = document.getElementById('copy-markdown');
+
+            let productCount = 0; // Contador para o nome dos produtos
+
+            // Função para criar uma nova linha de produto
+            const createProductRow = () => {
+                productCount++;
+                const productRow = document.createElement('div');
+                productRow.classList.add('product-row');
+                productRow.dataset.id = productCount; // Usar dataset para o ID
+
+                productRow.innerHTML = `
+                    <div>
+                        <label for="product-name-${productCount}">Nome do Produto:</label>
+                        <input type="text" id="product-name-${productCount}" value="Produto ${productCount}">
+                    </div>
+                    <div>
+                        <label for="price-${productCount}">Preço Atual (R$):</label>
+                        <input type="number" id="price-${productCount}" step="0.01" min="0" value="0.00">
+                    </div>
+                    <div>
+                        <label for="quantity-${productCount}">Quantidade:</label>
+                        <input type="number" id="quantity-${productCount}" step="0.01" min="0" value="1.00">
+                    </div>
+                    <div>
+                        <label for="unit-${productCount}">Unidade:</label>
+                        <select id="unit-${productCount}">
+                            <option value="kg">KG (1000g)</option>
+                            <option value="gram">Grama (1g)</option>
+                            <option value="custom">Personalizado</option>
+                        </select>
+                    </div>
+                    <div class="fraction-input">
+                        <label for="custom-fraction-${productCount}">Fração Personalizada:</label>
+                        <input type="number" id="custom-fraction-${productCount}" step="1" min="1" value="100">
+                    </div>
+                    <div>
+                        <label>Preço por Fração:</label>
+                        <span class="price-per-fraction" id="price-per-fraction-${productCount}">R$ 0.00</span>
+                    </div>
+                    <button class="remove-product-btn" title="Remover Produto">X</button>
+                `;
+                productList.appendChild(productRow);
+
+                // Obter referências aos elementos dentro da nova linha
+                const priceInput = productRow.querySelector(`#price-${productCount}`);
+                const quantityInput = productRow.querySelector(`#quantity-${productCount}`);
+                const unitSelect = productRow.querySelector(`#unit-${productCount}`);
+                const customFractionInput = productRow.querySelector(`#custom-fraction-${productCount}`);
+                const pricePerFractionSpan = productRow.querySelector(`#price-per-fraction-${productCount}`);
+                const removeButton = productRow.querySelector('.remove-product-btn');
+                const fractionInputContainer = productRow.querySelector('.fraction-input');
+
+                // Função para calcular o preço por fração
+                const calculatePrice = () => {
+                    const price = parseFloat(priceInput.value) || 0;
+                    const quantity = parseFloat(quantityInput.value) || 0;
+                    const unit = unitSelect.value;
+                    let fractionValue = 1; // Padrão para grama
+
+                    if (quantity === 0) {
+                        pricePerFractionSpan.textContent = 'R$ 0.00';
+                        productRow.dataset.calculatedPrice = 0;
+                        return;
+                    }
+
+                    if (unit === 'kg') {
+                        fractionValue = 1000;
+                    } else if (unit === 'custom') {
+                        fractionValue = parseFloat(customFractionInput.value) || 1;
+                    } else { // grama
+                        fractionValue = 1;
+                    }
+
+                    const pricePerFraction = (price / quantity) * fractionValue;
+                    pricePerFractionSpan.textContent = `R$ ${pricePerFraction.toFixed(2)}`;
+                    productRow.dataset.calculatedPrice = pricePerFraction.toFixed(2); // Armazena para ordenação
+                };
+
+                // Adicionar listeners para recalcular ao mudar os valores
+                priceInput.addEventListener('input', calculatePrice);
+                quantityInput.addEventListener('input', calculatePrice);
+                customFractionInput.addEventListener('input', calculatePrice);
+
+                unitSelect.addEventListener('change', () => {
+                    if (unitSelect.value === 'custom') {
+                        fractionInputContainer.classList.add('active'); // Mostra o campo
+                        customFractionInput.disabled = false; // Habilita o campo
+                    } else {
+                        fractionInputContainer.classList.remove('active'); // Esconde o campo
+                        customFractionInput.disabled = true; // Desabilita o campo
+                    }
+                    calculatePrice();
+                });
+
+                removeButton.addEventListener('click', () => {
+                    if (productList.children.length > 3) { // Permite remover se houver mais de 3 produtos
+                        productRow.remove();
+                    } else {
+                        alert('Você deve ter pelo menos 3 produtos na lista.');
+                    }
+                });
+
+                // Chamada inicial para calcular o preço
+                calculatePrice();
+            };
+
+            // Adicionar as 3 linhas iniciais
+            for (let i = 0; i < 3; i++) {
+                createProductRow();
+            }
+
+            // Listener para o botão de adicionar produto
+            addProductBtn.addEventListener('click', createProductRow);
+
+            // Listener para o botão de ordenar
+            sortButton.addEventListener('click', () => {
+                const productRows = Array.from(productList.children); // Converte HTMLCollection para Array
+
+                // Remove o destaque de todos antes de reordenar
+                productRows.forEach(row => row.classList.remove('highlight-cheapest'));
+
+                productRows.sort((a, b) => {
+                    const priceA = parseFloat(a.dataset.calculatedPrice);
+                    const priceB = parseFloat(b.dataset.calculatedPrice);
+                    return priceA - priceB;
+                });
+
+                // Reinsere os produtos na ordem correta
+                productRows.forEach(row => productList.appendChild(row));
+
+                // Destaca o produto mais barato (o primeiro após a ordenação)
+                if (productRows.length > 0) {
+                    productRows[0].classList.add('highlight-cheapest');
+                }
+            });
+
+            // Listener para o botão de imprimir
+            printButton.addEventListener('click', () => {
+                window.print();
+            });
+
+            // Função para exportar e copiar como PNG
+            const exportAsPng = async (action = 'clipboard') => {
+                // Esconde os botões de controle e o campo de Markdown temporariamente
+                const controlsDiv = document.querySelector('.controls');
+                const markdownDiv = document.getElementById('markdown-output');
+                const addBtn = document.getElementById('add-product');
+                const removeBtns = document.querySelectorAll('.remove-product-btn');
+
+                controlsDiv.style.display = 'none';
+                markdownDiv.style.display = 'none';
+                addBtn.style.display = 'none';
+                removeBtns.forEach(btn => btn.style.display = 'none');
+
+
+                // Captura o container principal
+                const container = document.querySelector('.container');
+                try {
+                    const canvas = await html2canvas(container, {
+                        scale: 2, // Aumenta a resolução da imagem
+                        logging: false, // Desativa logs no console
+                        useCORS: true // Importante para lidar com imagens de outras origens, se houver
+                    });
+
+                    if (action === 'clipboard') {
+                        // Copiar para a área de transferência
+                        canvas.toBlob(blob => {
+                            if (navigator.clipboard && navigator.clipboard.write) {
+                                navigator.clipboard.write([
+                                    new ClipboardItem({ 'image/png': blob })
+                                ]).then(() => {
+                                    alert('Imagem copiada para a área de transferência!');
+                                }).catch(err => {
+                                    console.error('Erro ao copiar imagem:', err);
+                                    alert('Erro ao copiar imagem. Seu navegador pode não suportar esta funcionalidade ou as permissões foram negadas.');
+                                });
+                            } else {
+                                alert('Seu navegador não suporta a cópia direta de imagens para a área de transferência. Tente a opção "Salvar como PNG".');
+                            }
+                        }, 'image/png');
+                    } else if (action === 'save') {
+                        // Salvar como arquivo
+                        const link = document.createElement('a');
+                        link.download = 'comparacao_precos.png';
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                    }
+                } catch (error) {
+                    console.error('Erro ao gerar PNG:', error);
+                    alert('Ocorreu um erro ao gerar a imagem PNG. Por favor, tente novamente.');
+                } finally {
+                    // Reexibe os elementos escondidos
+                    controlsDiv.style.display = 'flex';
+                    if (markdownTextarea.style.display !== 'none') { // Se o markdown estava visível, reexibe
+                        markdownDiv.style.display = 'block';
+                    }
+                    addBtn.style.display = 'block';
+                    removeBtns.forEach(btn => btn.style.display = 'flex'); // Volta para display: flex
+
+                }
+            };
+
+            exportPngClipboardBtn.addEventListener('click', () => exportAsPng('clipboard'));
+            exportPngSaveBtn.addEventListener('click', () => exportAsPng('save'));
+
+            // Listener para o botão de gerar Markdown
+            exportMarkdownBtn.addEventListener('click', () => {
+                const productRows = Array.from(productList.children);
+                let markdownContent = '';
+
+                productRows.forEach(row => {
+                    const productName = row.querySelector('[id^="product-name-"]').value;
+                    const price = parseFloat(row.querySelector('[id^="price-"]').value) || 0;
+                    const quantity = parseFloat(row.querySelector('[id^="quantity-"]').value) || 0;
+                    const unit = row.querySelector('[id^="unit-"]').value;
+                    const customFractionInput = row.querySelector('[id^="custom-fraction-"]');
+                    const pricePerFractionSpan = row.querySelector('[id^="price-per-fraction-"]');
+
+                    let fractionDescription = '';
+                    let fractionValue = 1;
+
+                    if (unit === 'kg') {
+                        fractionValue = 1000;
+                        fractionDescription = 'KG (1000g)';
+                    } else if (unit === 'gram') {
+                        fractionValue = 1;
+                        fractionDescription = 'Grama (1g)';
+                    } else if (unit === 'custom') {
+                        fractionValue = parseFloat(customFractionInput.value) || 1;
+                        fractionDescription = `Personalizado (${fractionValue})`;
+                    }
+
+                    const calculatedPricePerFraction = parseFloat(pricePerFractionSpan.textContent.replace('R$', '').trim());
+
+                    markdownContent += `### ${productName}\n`;
+                    markdownContent += `- **Preço Normal:** R$ ${price.toFixed(2)}\n`;
+                    markdownContent += `- **Quantidade:** ${quantity.toFixed(2)} ${unit}\n`;
+                    markdownContent += `- **Fração Escolhida:** ${fractionDescription}\n`;
+                    markdownContent += `- **Preço por Fração (${fractionValue}):** R$ ${calculatedPricePerFraction.toFixed(2)}\n\n`;
+                });
+
+                markdownTextarea.value = markdownContent;
+                markdownOutputSection.style.display = 'block'; // Mostra a seção de Markdown
+
+                // Copia para a área de transferência automaticamente
+                markdownTextarea.select();
+                navigator.clipboard.writeText(markdownTextarea.value)
+                    .then(() => {
+                        alert('Conteúdo Markdown copiado para a área de transferência!');
+                    })
+                    .catch(err => {
+                        console.error('Erro ao copiar Markdown:', err);
+                        alert('Erro ao copiar Markdown. Por favor, copie manualmente.');
+                    });
+            });
+
+            // Listener para o botão de copiar Markdown (se o usuário fechar e quiser copiar de novo)
+            copyMarkdownBtn.addEventListener('click', () => {
+                markdownTextarea.select();
+                navigator.clipboard.writeText(markdownTextarea.value)
+                    .then(() => {
+                        alert('Conteúdo Markdown copiado para a área de transferência!');
+                    })
+                    .catch(err => {
+                        console.error('Erro ao copiar Markdown:', err);
+                        alert('Erro ao copiar Markdown. Por favor, copie manualmente.');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
