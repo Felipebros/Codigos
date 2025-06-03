@@ -33,6 +33,62 @@
             margin-bottom: 30px;
         }
 
+        /* --- Estilos da Mensagem Customizada --- */
+        #message-container {
+            position: relative; /* Para posicionar o botão de fechar */
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none; /* Escondida por padrão */
+            font-weight: bold;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out; /* Animação de entrada */
+        }
+
+        #message-container.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #message-container.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        #message-container.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        #message-container .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: inherit; /* Herda a cor do texto da div pai */
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1; /* Alinha o "x" verticalmente */
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        #message-container .close-btn:hover {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* --- Fim dos Estilos da Mensagem Customizada --- */
+
+
         .product-row {
             display: grid;
             grid-template-columns: 0.5fr 1fr 0.8fr 0.8fr 1.2fr 0.5fr 0.2fr; /* Ajustado para mais colunas */
@@ -264,6 +320,12 @@
         | <a href="https://github.com/Felipebros/Codigos/blob/main/src/comparar_preços.html">Repositório</a>
 
         <h1>Comparador de Preços Inteligente</h1>
+
+        <div id="message-container">
+            <span id="message-text"></span>
+            <button class="close-btn" aria-label="Fechar mensagem">&times;</button>
+        </div>
+
         <div id="product-list">
             </div>
         <button id="add-product" class="btn add-btn">Adicionar Produto</button>
@@ -292,13 +354,39 @@
             const sortButton = document.getElementById('sort-by-price');
             const printButton = document.getElementById('print-page');
             const exportPngClipboardBtn = document.getElementById('export-png-clipboard');
-            const exportPngSaveBtn = document.getElementById('export-png-save');
+            const exportPngSaveBtn = document = document.getElementById('export-png-save');
             const exportMarkdownBtn = document.getElementById('export-markdown');
             const markdownOutputSection = document.getElementById('markdown-output');
             const markdownTextarea = document.getElementById('markdown-textarea');
             const copyMarkdownBtn = document.getElementById('copy-markdown');
 
+            // Referências para a div de mensagem
+            const messageContainer = document.getElementById('message-container');
+            const messageText = document.getElementById('message-text');
+            const messageCloseBtn = messageContainer.querySelector('.close-btn');
+
+
             let productCount = 0; // Contador para o nome dos produtos
+
+            // Função para exibir mensagens customizadas
+            const showMessage = (message, type = 'info', duration = 5000) => {
+                messageText.textContent = message;
+                messageContainer.className = ''; // Limpa classes existentes
+                messageContainer.classList.add(type); // Adiciona a classe de tipo (success, error, info)
+                messageContainer.style.display = 'block'; // Mostra a div
+
+                // Define um temporizador para esconder a mensagem automaticamente
+                if (duration > 0) {
+                    setTimeout(() => {
+                        messageContainer.style.display = 'none';
+                    }, duration);
+                }
+            };
+
+            // Listener para o botão de fechar a mensagem
+            messageCloseBtn.addEventListener('click', () => {
+                messageContainer.style.display = 'none';
+            });
 
             // Função para formatar números para BRL (usando vírgula para decimal e ponto para milhar)
             const formatNumberToBRL = (value, isCurrency = true) => {
@@ -399,7 +487,6 @@
                 };
 
                 // Adicionar listeners para recalcular ao mudar os valores
-                // Não precisamos mais dos listeners de 'blur' para formatação nos inputs type="number"
                 priceInput.addEventListener('input', calculatePrice);
                 quantityInput.addEventListener('input', calculatePrice);
                 customFractionInput.addEventListener('input', calculatePrice);
@@ -418,8 +505,9 @@
                 removeButton.addEventListener('click', () => {
                     if (productList.children.length > 3) { // Permite remover se houver mais de 3 produtos
                         productRow.remove();
+                        showMessage('Produto removido com sucesso!', 'info');
                     } else {
-                        alert('Você deve ter pelo menos 3 produtos na lista.');
+                        showMessage('Você deve ter pelo menos 3 produtos na lista para remover.', 'error');
                     }
                 });
 
@@ -433,7 +521,10 @@
             }
 
             // Listener para o botão de adicionar produto
-            addProductBtn.addEventListener('click', createProductRow);
+            addProductBtn.addEventListener('click', () => {
+                createProductRow();
+                showMessage('Novo produto adicionado!', 'success');
+            });
 
             // Listener para o botão de ordenar
             sortButton.addEventListener('click', () => {
@@ -454,6 +545,9 @@
                 // Destaca o produto mais barato (o primeiro após a ordenação)
                 if (productRows.length > 0) {
                     productRows[0].classList.add('highlight-cheapest');
+                    showMessage('Produtos ordenados por preço (mais barato primeiro).', 'info');
+                } else {
+                    showMessage('Não há produtos para ordenar.', 'info');
                 }
             });
 
@@ -470,6 +564,7 @@
                 const addBtn = document.getElementById('add-product');
                 const removeBtns = document.querySelectorAll('.remove-product-btn');
                 const navLinks = document.querySelectorAll('a[href^="https://felipebros.github.io"]');
+                const messageContainerTemp = document.getElementById('message-container'); // Ocultar a mensagem também
 
 
                 controlsDiv.style.display = 'none';
@@ -477,6 +572,7 @@
                 addBtn.style.display = 'none';
                 removeBtns.forEach(btn => btn.style.display = 'none');
                 navLinks.forEach(link => link.style.display = 'none'); // Esconde os links de navegação
+                messageContainerTemp.style.display = 'none'; // Esconde a div de mensagem
 
 
                 // Captura o container principal
@@ -495,13 +591,13 @@
                                 navigator.clipboard.write([
                                     new ClipboardItem({ 'image/png': blob })
                                 ]).then(() => {
-                                    alert('Imagem copiada para a área de transferência!');
+                                    showMessage('Imagem copiada para a área de transferência!', 'success');
                                 }).catch(err => {
                                     console.error('Erro ao copiar imagem:', err);
-                                    alert('Erro ao copiar imagem. Seu navegador pode não suportar esta funcionalidade ou as permissões foram negadas.');
+                                    showMessage('Erro ao copiar imagem. Seu navegador pode não suportar esta funcionalidade ou as permissões foram negadas.', 'error', 8000); // Mensagem mais longa
                                 });
                             } else {
-                                alert('Seu navegador não suporta a cópia direta de imagens para a área de transferência. Tente a opção "Salvar como PNG".');
+                                showMessage('Seu navegador não suporta a cópia direta de imagens para a área de transferência. Tente a opção "Salvar como PNG".', 'error', 8000);
                             }
                         }, 'image/png');
                     } else if (action === 'save') {
@@ -510,10 +606,11 @@
                         link.download = 'comparacao_precos.png';
                         link.href = canvas.toDataURL('image/png');
                         link.click();
+                        showMessage('Imagem salva como PNG!', 'success');
                     }
                 } catch (error) {
                     console.error('Erro ao gerar PNG:', error);
-                    alert('Ocorreu um erro ao gerar a imagem PNG. Por favor, tente novamente.');
+                    showMessage('Ocorreu um erro ao gerar a imagem PNG. Por favor, tente novamente.', 'error', 8000);
                 } finally {
                     // Reexibe os elementos escondidos
                     controlsDiv.style.display = 'flex';
@@ -523,7 +620,7 @@
                     addBtn.style.display = 'block';
                     removeBtns.forEach(btn => btn.style.display = 'flex'); // Volta para display: flex
                     navLinks.forEach(link => link.style.display = 'inline'); // Reexibe os links de navegação
-
+                    // Não reexiba a mensagem automaticamente aqui, ela será controlada pela função showMessage
                 }
             };
 
@@ -562,11 +659,11 @@
                 markdownTextarea.select();
                 navigator.clipboard.writeText(markdownTextarea.value)
                     .then(() => {
-                        alert('Conteúdo Markdown copiado para a área de transferência!');
+                        showMessage('Conteúdo Markdown copiado para a área de transferência!', 'success');
                     })
                     .catch(err => {
                         console.error('Erro ao copiar Markdown:', err);
-                        alert('Erro ao copiar Markdown. Por favor, copie manualmente.');
+                        showMessage('Erro ao copiar Markdown. Por favor, copie manualmente.', 'error', 8000);
                     });
             });
 
@@ -575,11 +672,11 @@
                 markdownTextarea.select();
                 navigator.clipboard.writeText(markdownTextarea.value)
                     .then(() => {
-                        alert('Conteúdo Markdown copiado para a área de transferência!');
+                        showMessage('Conteúdo Markdown copiado para a área de transferência!', 'success');
                     })
                     .catch(err => {
                         console.error('Erro ao copiar Markdown:', err);
-                        alert('Erro ao copiar Markdown. Por favor, copie manualmente.');
+                        showMessage('Erro ao copiar Markdown. Por favor, copie manualmente.', 'error', 8000);
                     });
             });
         });
