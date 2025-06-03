@@ -58,6 +58,7 @@
             display: block;
         }
 
+        /* Estilo para todos os inputs e selects (largura, padding, borda, etc.) */
         .product-row input[type="text"],
         .product-row input[type="number"],
         .product-row select {
@@ -67,6 +68,11 @@
             border-radius: 5px;
             font-size: 1rem;
             box-sizing: border-box; /* Inclui padding e border no width */
+        }
+
+        /* Estilo específico para o input de nome do produto (type="text") */
+        .product-row input[type="text"] {
+            min-width: 200px; /* Largura mínima desejada */
         }
 
         .product-row input[type="number"]::-webkit-inner-spin-button,
@@ -234,6 +240,11 @@
             .product-row input[type="number"],
             .product-row select {
                 width: 100%;
+            }
+            /* Em telas menores, o min-width de 200px pode ser muito grande.
+               Podemos remover ou ajustar para que o campo se adapte melhor. */
+            .product-row input[type="text"] {
+                min-width: unset; /* Permite que o campo ocupe o espaço disponível */
             }
             .controls {
                 flex-direction: column;
