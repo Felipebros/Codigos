@@ -91,7 +91,7 @@
 
         .product-row {
             display: grid;
-            grid-template-columns: 0.5fr 1fr 0.8fr 0.8fr 1.2fr 0.5fr 0.2fr; /* Ajustado para mais colunas */
+            grid-template-columns: 0.5fr 1fr 0.8fr 0.8fr 1.2fr 0.8fr 0.2fr; /* Mais uma coluna para o novo valor */
             gap: 15px;
             align-items: center;
             margin-bottom: 15px;
@@ -148,7 +148,8 @@
             display: block; /* Visível quando ativo */
         }
 
-        .product-row .price-per-fraction {
+        .product-row .price-per-fraction,
+        .product-row .simulated-price { /* Novo estilo para o valor simulado */
             font-weight: bold;
             color: #007bff;
             font-size: 1.1rem;
@@ -157,6 +158,11 @@
             padding: 8px;
             border-radius: 5px;
         }
+        .product-row .simulated-price {
+             color: #6f42c1; /* Cor diferente para o valor simulado */
+             background-color: #f3eafa;
+        }
+
 
         .btn {
             padding: 12px 20px;
@@ -332,6 +338,7 @@
 
         <div class="controls">
             <button id="sort-by-price" class="btn sort-btn">Ordenar por Preço (Mais Barato)</button>
+            <button id="calculate-simulated" class="btn sort-btn">Calcular Valor por Maior Unidade</button>
             <button id="print-page" class="btn print-btn">Imprimir</button>
             <button id="export-png-clipboard" class="btn export-btn">Copiar como PNG</button>
             <button id="export-png-save" class="btn export-btn">Salvar como PNG</button>
@@ -352,9 +359,10 @@
             const productList = document.getElementById('product-list');
             const addProductBtn = document.getElementById('add-product');
             const sortButton = document.getElementById('sort-by-price');
+            const calculateSimulatedButton = document.getElementById('calculate-simulated'); // Novo botão
             const printButton = document.getElementById('print-page');
             const exportPngClipboardBtn = document.getElementById('export-png-clipboard');
-            const exportPngSaveBtn = document = document.getElementById('export-png-save');
+            const exportPngSaveBtn = document.getElementById('export-png-save');
             const exportMarkdownBtn = document.getElementById('export-markdown');
             const markdownOutputSection = document.getElementById('markdown-output');
             const markdownTextarea = document.getElementById('markdown-textarea');
@@ -389,16 +397,31 @@
             });
 
             // Função para formatar números para BRL (usando vírgula para decimal e ponto para milhar)
-            const formatNumberToBRL = (value, isCurrency = true) => {
+            // Agora com opções para mais casas decimais
+            const formatNumberToBRL = (value, isCurrency = true, maxDecimals = 2) => {
                 const options = {
                     minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
+                    maximumFractionDigits: maxDecimals
                 };
                 if (isCurrency) {
                     options.style = 'currency';
                     options.currency = 'BRL';
                 }
                 return value.toLocaleString('pt-BR', options);
+            };
+
+            // Função para converter a unidade para uma base comum (gramas para comparação)
+            const convertUnitToGrams = (unit, customValue) => {
+                switch (unit) {
+                    case 'kg':
+                        return 1000;
+                    case 'gram':
+                        return 1;
+                    case 'custom':
+                        return customValue;
+                    default:
+                        return 0;
+                }
             };
 
             // Função para criar uma nova linha de produto
@@ -431,11 +454,15 @@
                     </div>
                     <div class="fraction-input">
                         <label for="custom-fraction-${productCount}">Fração Personalizada:</label>
-                        <input type="number" id="custom-fraction-${productCount}" step="1" min="1" value="100">
+                        <input type="number" id="custom-fraction-${productCount}" step="0.01" min="0" value="100">
                     </div>
                     <div>
                         <label>Preço por Fração:</label>
                         <span class="price-per-fraction" id="price-per-fraction-${productCount}">R$ 0,00</span>
+                    </div>
+                    <div>
+                        <label>Valor em Maior Unidade:</label>
+                        <span class="simulated-price" id="simulated-price-${productCount}">R$ 0,00</span>
                     </div>
                     <button class="remove-product-btn" title="Remover Produto">X</button>
                 `;
@@ -447,43 +474,46 @@
                 const unitSelect = productRow.querySelector(`#unit-${productCount}`);
                 const customFractionInput = productRow.querySelector(`#custom-fraction-${productCount}`);
                 const pricePerFractionSpan = productRow.querySelector(`#price-per-fraction-${productCount}`);
+                const simulatedPriceSpan = productRow.querySelector(`#simulated-price-${productCount}`); // Novo span
                 const removeButton = productRow.querySelector('.remove-product-btn');
                 const fractionInputContainer = productRow.querySelector('.fraction-input');
 
                 // Função para calcular o preço por fração
                 const calculatePrice = () => {
-                    // parseFloat() já é adequado para inputs type="number"
                     const price = parseFloat(priceInput.value) || 0;
                     const quantity = parseFloat(quantityInput.value) || 0;
                     const unit = unitSelect.value;
                     let calculatedPricePerFraction = 0;
                     let fractionDescription = '';
+                    let unitInGrams = 0; // Armazenar o valor em gramas para comparação
 
                     if (quantity === 0) {
                         calculatedPricePerFraction = 0;
                     } else if (unit === 'kg') {
-                        // Preço por grama: Preço total / (Quantidade em KG * 1000)
                         calculatedPricePerFraction = price / (quantity * 1000);
                         fractionDescription = 'KG (1000g)';
+                        unitInGrams = 1000;
                     } else if (unit === 'gram') {
-                        // Preço por grama: Preço total / Quantidade em gramas
                         calculatedPricePerFraction = price / quantity;
                         fractionDescription = 'Grama (1g)';
+                        unitInGrams = 1;
                     } else if (unit === 'custom') {
-                        const customFractionValue = parseFloat(customFractionInput.value) || 1;
-                        if (customFractionValue === 0) { // Evita divisão por zero para custom
+                        const customFractionValue = parseFloat(customFractionInput.value) || 0;
+                        if (customFractionValue === 0) {
                             calculatedPricePerFraction = 0;
+                            unitInGrams = 0;
                         } else {
-                            // Preço por fração personalizada: (Preço total / Quantidade) / Valor personalizado
                             calculatedPricePerFraction = (price / quantity) / customFractionValue;
+                            fractionDescription = `Personalizado (${formatNumberToBRL(customFractionValue, false, 2)} unidade${customFractionValue > 1 ? 's' : ''})`;
+                            unitInGrams = customFractionValue;
                         }
-                        fractionDescription = `Personalizado (${formatNumberToBRL(customFractionValue, false)} unidade${customFractionValue > 1 ? 's' : ''})`;
                     }
 
-                    // Atualiza o texto e o dataset, formatando para BRL
-                    pricePerFractionSpan.textContent = formatNumberToBRL(calculatedPricePerFraction);
+                    // Atualiza o texto e o dataset, formatando para BRL com até 5 casas decimais
+                    pricePerFractionSpan.textContent = formatNumberToBRL(calculatedPricePerFraction, true, 5);
                     productRow.dataset.calculatedPrice = calculatedPricePerFraction; // Armazena o float para ordenação
                     productRow.dataset.fractionDescription = fractionDescription; // Armazena a descrição para o Markdown
+                    productRow.dataset.unitInGrams = unitInGrams; // Armazena o valor em gramas para a nova funcionalidade
                 };
 
                 // Adicionar listeners para recalcular ao mudar os valores
@@ -505,6 +535,8 @@
                 removeButton.addEventListener('click', () => {
                     if (productList.children.length > 3) { // Permite remover se houver mais de 3 produtos
                         productRow.remove();
+                        // Recalcula o valor simulado para todos os itens se um item foi removido
+                        calculateSimulatedPrices();
                         showMessage('Produto removido com sucesso!', 'info');
                     } else {
                         showMessage('Você deve ter pelo menos 3 produtos na lista para remover.', 'error');
@@ -515,14 +547,53 @@
                 calculatePrice();
             };
 
+            // Função para calcular e exibir os preços simulados
+            const calculateSimulatedPrices = () => {
+                const productRows = Array.from(productList.children);
+                let maxUnitInGrams = 0; // Valor da maior unidade de referência encontrada
+
+                // 1. Encontrar a maior unidade de referência entre todos os produtos
+                productRows.forEach(row => {
+                    const unitInGrams = parseFloat(row.dataset.unitInGrams) || 0;
+                    if (unitInGrams > maxUnitInGrams) {
+                        maxUnitInGrams = unitInGrams;
+                    }
+                });
+
+                // 2. Para cada produto, calcular o valor simulado
+                productRows.forEach(row => {
+                    const calculatedPricePerFraction = parseFloat(row.dataset.calculatedPrice) || 0;
+                    const simulatedPriceSpan = row.querySelector('[id^="simulated-price-"]');
+
+                    let simulatedValue = 0;
+                    if (maxUnitInGrams > 0) {
+                        simulatedValue = calculatedPricePerFraction * maxUnitInGrams;
+                    }
+                    
+                    // Atualiza o span do valor simulado
+                    simulatedPriceSpan.textContent = formatNumberToBRL(simulatedValue, true, 2); // Exibe com 2 casas decimais para o valor simulado
+                });
+
+                if (maxUnitInGrams > 0) {
+                     showMessage(`Valor simulado calculado com base na maior unidade de referência: ${formatNumberToBRL(maxUnitInGrams, false, 2)} unidades.`, 'info');
+                } else {
+                     showMessage('Não foi possível calcular o valor simulado. Verifique os valores de quantidade e fração personalizada.', 'error');
+                }
+            };
+
+
             // Adicionar as 3 linhas iniciais
             for (let i = 0; i < 3; i++) {
                 createProductRow();
             }
+            // Chama o cálculo simulado inicial
+            calculateSimulatedPrices();
+
 
             // Listener para o botão de adicionar produto
             addProductBtn.addEventListener('click', () => {
                 createProductRow();
+                calculateSimulatedPrices(); // Recalcula os valores simulados ao adicionar
                 showMessage('Novo produto adicionado!', 'success');
             });
 
@@ -550,6 +621,10 @@
                     showMessage('Não há produtos para ordenar.', 'info');
                 }
             });
+
+            // Novo Listener para o botão de calcular valor simulado
+            calculateSimulatedButton.addEventListener('click', calculateSimulatedPrices);
+
 
             // Listener para o botão de imprimir
             printButton.addEventListener('click', () => {
@@ -632,30 +707,31 @@
                 const productRows = Array.from(productList.children);
                 let markdownContent = '';
 
+                // Garante que os preços simulados estão atualizados antes de gerar o Markdown
+                calculateSimulatedPrices();
+
                 productRows.forEach(row => {
                     const productName = row.querySelector('[id^="product-name-"]').value;
-                    // Lemos os valores diretamente dos inputs como números
                     const price = parseFloat(row.querySelector('[id^="price-"]').value) || 0;
                     const quantity = parseFloat(row.querySelector('[id^="quantity-"]').value) || 0;
                     const unit = row.querySelector('[id^="unit-"]').value;
-                    const customFractionInput = row.querySelector('[id^="custom-fraction-"]');
                     
-                    const fractionDescription = row.dataset.fractionDescription || ''; // Pega a descrição já armazenada
+                    const fractionDescription = row.dataset.fractionDescription || '';
                     const calculatedPricePerFraction = parseFloat(row.dataset.calculatedPrice) || 0;
+                    const simulatedPrice = parseFloat(row.querySelector('[id^="simulated-price-"]').textContent.replace('R$', '').replace(/\./g, '').replace(',', '.')) || 0; // Pega o valor formatado do span
 
 
                     markdownContent += `### ${productName}\n`;
                     markdownContent += `- **Preço Total:** ${formatNumberToBRL(price)}\n`;
-                    // A quantidade pode ser formatada sem símbolo de moeda, mas com 2 casas decimais e separador de milhar
-                    markdownContent += `- **Quantidade:** ${formatNumberToBRL(quantity, false)} ${unit}\n`;
+                    markdownContent += `- **Quantidade:** ${formatNumberToBRL(quantity, false, 2)} ${unit}\n`;
                     markdownContent += `- **Unidade de Referência:** ${fractionDescription}\n`;
-                    markdownContent += `- **Preço por Unidade de Referência:** ${formatNumberToBRL(calculatedPricePerFraction)}\n\n`;
+                    markdownContent += `- **Preço por Unidade de Referência:** ${formatNumberToBRL(calculatedPricePerFraction, true, 5)}\n`; // 5 casas decimais aqui
+                    markdownContent += `- **Valor Simulado (em maior unidade):** ${formatNumberToBRL(simulatedPrice)}\n\n`; // Já formatado, mas para consistência, use o formatador
                 });
 
                 markdownTextarea.value = markdownContent;
                 markdownOutputSection.style.display = 'block'; // Mostra a seção de Markdown
 
-                // Copia para a área de transferência automaticamente
                 markdownTextarea.select();
                 navigator.clipboard.writeText(markdownTextarea.value)
                     .then(() => {
