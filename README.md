@@ -13,6 +13,7 @@ Site: https://felipebros.github.io/Codigos/
 #### [Atalhos úteis do ranger.md](./Atalhos%20úteis%20do%20ranger.md)
 #### [Atalhos úteis do terminal Linux.md](./Atalhos%20úteis%20do%20terminal%20Linux.md)
 #### [calculadora_porcentagem.html](./src/calculadora_porcentagem.html)
+#### [comparar_preços.html](./src/comparar_preços.html)
 #### [Comandos básicos linux.md](./Comandos%20básicos%20linux.md)
 #### [comandos_importantes.sh](./comandos_importantes.sh)
 #### [Comandos PostgreSQL.md](./Comandos%20PostgreSQL.md)
