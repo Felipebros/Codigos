@@ -37,6 +37,7 @@
         #message-container {
             position: relative; /* Para posicionar o botão de fechar */
             padding: 15px;
+            margin-top: 20px;
             margin-bottom: 20px;
             border-radius: 8px;
             display: none; /* Escondida por padrão */
@@ -327,13 +328,8 @@
 
         <h1>Comparador de Preços Inteligente</h1>
 
-        <div id="message-container">
-            <span id="message-text"></span>
-            <button class="close-btn" aria-label="Fechar mensagem">&times;</button>
-        </div>
-
         <div id="product-list">
-            </div>
+        </div>
         <button id="add-product" class="btn add-btn">Adicionar Produto</button>
 
         <div class="controls">
@@ -343,6 +339,11 @@
             <button id="export-png-clipboard" class="btn export-btn">Copiar como PNG</button>
             <button id="export-png-save" class="btn export-btn">Salvar como PNG</button>
             <button id="export-markdown" class="btn markdown-btn">Gerar Markdown</button>
+        </div>
+
+        <div id="message-container">
+            <span id="message-text"></span>
+            <button class="close-btn" aria-label="Fechar mensagem">&times;</button>
         </div>
 
         <div id="markdown-output" class="markdown-section" style="display: none;">
