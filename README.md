@@ -8,8 +8,7 @@ Site: https://felipebros.github.io/Codigos/
 
 ---
 
-{% assign adicionar_alias_no_linux = "adicionar_alias_no_linux" %}
-#### [{{ adicionar_alias_no_linux }}.md](./{{ adicionar_alias_no_linux }}.md) [repositório](https://felipebros.github.io/Codigos/{{adicionar_alias_no_linux}}.html)
+#### [adicionar_alias_no_linux.md](./adicionar_alias_no_linux.md)
 #### [Alterar pasta padrão apache.md](./Alterar%20pasta%20padrão%20apache.md)
 #### [Atalhos úteis do ranger.md](./Atalhos%20úteis%20do%20ranger.md)
 #### [Atalhos úteis do terminal Linux.md](./Atalhos%20úteis%20do%20terminal%20Linux.md)
