@@ -84,18 +84,18 @@
     let linkGerado = "";
 
     jsonInput.addEventListener("input", () => {
-      let docid = "";
+      let addebug_videoId = "";
       const input = jsonInput.value.trim();
       try {
         const data = JSON.parse(input);
-        docid = data.docid;
-        if (!docid) throw new Error("docid ausente");
+        addebug_videoId = data.addebug_videoId;
+        if (!addebug_videoId) throw new Error("addebug_videoId ausente");
       } catch (e) {
-        docid = input;
+        addebug_videoId = input;
       }
 
-      if (docid) {
-        linkGerado = `https://www.youtube.com/watch?v=${encodeURIComponent(docid)}`;
+      if (addebug_videoId) {
+        linkGerado = `https://www.youtube.com/watch?v=${encodeURIComponent(addebug_videoId)}`;
         youtubeLink.href = linkGerado;
         youtubeLink.textContent = linkGerado;
         outputDiv.style.display = "flex";
