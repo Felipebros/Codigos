@@ -6,8 +6,6 @@ Repositório: [https://github.com/Felipebros/Codigos](https://github.com/Felipeb
 
 Site: https://felipebros.github.io/Codigos/
 
-{{ site.pages }}
-
 ---
 
 #### [adicionar_alias_no_linux.md](./adicionar_alias_no_linux.md)
