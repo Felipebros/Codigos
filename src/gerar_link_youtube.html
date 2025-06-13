@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Gerador de Link do YouTube</title>
@@ -9,57 +10,78 @@
       background: #f5f5f5;
       padding: 20px;
     }
+
     textarea {
       width: 100%;
-      height: 150px;
+      height: 220px;
       font-family: monospace;
       padding: 10px;
       box-sizing: border-box;
       margin-bottom: 10px;
+      resize: vertical;
     }
+
     button {
       padding: 10px 15px;
-      background-color: #007bff;
+      background-color: #27ae60;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      user-select: none;
     }
+
+    button:hover {
+      background-color: #219653;
+    }
+
     .output {
       margin-top: 15px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     a.link {
       font-weight: bold;
       word-break: break-word;
       color: #007bff;
       text-decoration: none;
     }
+
     a.link:hover {
       text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
   <a href="https://felipebros.github.io/Codigos/">Página Inicial</a>
-    | <a href="./gerar_link_youtube.html">Site</a>
-    | <a href="https://github.com/Felipebros/Codigos/blob/main/src/gerar_link_youtube.html">Repositório</a>
+  | <a href="./gerar_link_youtube.html">Site</a>
+  | <a href="https://github.com/Felipebros/Codigos/blob/main/src/gerar_link_youtube.html">Repositório</a>
 
-  <h2>Colar JSON ou ID para gerar link do YouTube</h2>
-  <textarea id="jsonInput" placeholder="Cole o JSON ou apenas o ID aqui..."></textarea>
+
+  <h1></h1>
+
+  <h3>1. Clique botão direito na propaganda ou vídeo do YouTube</h3>
+  <h3>2. E clique em "Copiar informações de depuração"</h3>
+  <img src="images/copiar_informacoes_de_depuracao_youtube.png" />
+
+  <h2>3. Cole o JSON ou ID para gerar o link do YouTube</h2>
+  <textarea id="jsonInput" placeholder="Cole o JSON ou apenas o ID aqui..."
+    aria-label="Campo para colar JSON ou ID"></textarea>
 
   <div class="output" id="output" style="display:none">
-    <a id="youtubeLink" class="link" href="#" target="_blank"></a>
-    <button id="copyButton">Copiar</button>
+    <a id="youtubeLink" class="link" href="#" target="_blank" rel="noopener noreferrer"></a>
+    <button id="copyButton" type="button">Copiar</button>
+  </div>
   </div>
 
   <script>
     const jsonInput = document.getElementById("jsonInput");
     const outputDiv = document.getElementById("output");
     const youtubeLink = document.getElementById("youtubeLink");
-    const copyButton = document.getElementById("copyButton");
+    let linkGerado = "";
 
     jsonInput.addEventListener("input", () => {
       let docid = "";
@@ -67,15 +89,15 @@
       try {
         const data = JSON.parse(input);
         docid = data.docid;
-        if (!docid) throw new Error();
-      } catch {
+        if (!docid) throw new Error("docid ausente");
+      } catch (e) {
         docid = input;
       }
 
       if (docid) {
-        const link = `https://www.youtube.com/watch?v=${docid}`;
-        youtubeLink.href = link;
-        youtubeLink.textContent = link;
+        linkGerado = `https://www.youtube.com/watch?v=${encodeURIComponent(docid)}`;
+        youtubeLink.href = linkGerado;
+        youtubeLink.textContent = linkGerado;
         outputDiv.style.display = "flex";
       } else {
         youtubeLink.href = "#";
@@ -84,13 +106,22 @@
       }
     });
 
-    copyButton.addEventListener("click", () => {
-      const link = youtubeLink.href;
-      if (!link || link === "#") return;
-      navigator.clipboard.writeText(link)
-        .then(() => alert("Link copiado!"))
-        .catch(err => alert("Erro ao copiar o link: " + err));
+    document.getElementById("copyButton").addEventListener("click", function () {
+      const linkGerado = youtubeLink.href;
+      if (!linkGerado || linkGerado === "#") return;
+      copyToClipboard(linkGerado, this);
     });
+
+    function copyToClipboard(text, buttonEl) {
+      navigator.clipboard.writeText(text).then(function () {
+        const originalText = buttonEl.textContent;
+        buttonEl.textContent = 'Copiado!';
+        setTimeout(() => {
+          buttonEl.textContent = originalText;
+        }, 2000);
+      }).catch(err => alert("Erro ao copiar o link: " + err));
+    }
   </script>
 </body>
+
 </html>
