@@ -9,17 +9,19 @@ se der erro precisa ativar
 - Clique no Botão "Ativar ou desativar recursos do Windows".
 - Marque a opção "Subsistema do Windows para Linux" e clique no botão "OK".
 
-2. Executar o comando abaixo:
+2. Executar o comando abaixo no PowerShell
 ```PowerShell
 wsl --install
 ```
 
 ## Para atualizar o WSL
+Execute esse comando no PowerShell
 ```PowerShell
 wsl --update
 ```
 
 ## Para definir o WSL 2 como padrão
+Execute esse comando no PowerShell
 ```PowerShell
 wsl --set-default-version 2
 ```
