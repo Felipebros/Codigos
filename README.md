@@ -50,4 +50,4 @@ Site: https://felipebros.github.io/Codigos/
 #### [SWAP causando lentidão ao ligar Ubuntu dual boot.md](./SWAP%20causando%20lentidão%20ao%20ligar%20Ubuntu%20dual%20boot.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/SWAP%20causando%20lentidão%20ao%20ligar%20Ubuntu%20dual%20boot.md)
 #### [Valgrind.md](./Valgrind.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Valgrind.md)
 #### [Ver Versão da distribuição Linux.md](./Ver%20Versão%20da%20distribuição%20Linux.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Ver%20Versão%20da%20distribuição%20Linux.md)
-#### [wsl.md](./src/wsl.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/src/wsl.md)
+#### [wsl.md](./docs/wsl.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/docs/wsl.md)
