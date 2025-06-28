@@ -24,6 +24,9 @@ wsl --update
 wsl --set-default-version 2
 ```
 
+## Alterar idioma do Ubuntu no WSL
+https://www.vivaolinux.com.br/topico/Debian-para-iniciantes/Problema-com-locale
+
 ## Para instalar sistemas GUI
 https://learn.microsoft.com/pt-br/windows/wsl/tutorials/gui-apps
 
