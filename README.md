@@ -34,7 +34,7 @@ Site: https://felipebros.github.io/Codigos/
 #### [Instalar PHP e Apache.md](./Instalar%20PHP%20e%20Apache.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Instalar%20PHP%20e%20Apache.md)
 #### [Instalar Postgres.md](./Instalar%20Postgres.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Instalar%20Postgres.md)
 #### [Instalar telegram.md](./Instalar%20telegram.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Instalar%20telegram.md)
-#### [LICENSE](./LICENSE) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/#### [LICENSE](./LICENSE) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/))
+#### [LICENSE](./LICENSE) - [Repositório](https://github.com/Felipebros/Codigos/blob/mainLICENSE)
 #### [Listar todos arquivos pasta e subpasta.bat](./Listar%20todos%20arquivos%20pasta%20e%20subpasta.bat) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Listar%20todos%20arquivos%20pasta%20e%20subpasta.bat)
 #### [Minhas configurações no gnome.md](./Minhas%20configurações%20no%20gnome.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/Minhas%20configurações%20no%20gnome.md)
 #### [mostrar_nome_da_branch_e_horas_no_terminal.md](./mostrar_nome_da_branch_e_horas_no_terminal.md) - [Repositório](https://github.com/Felipebros/Codigos/blob/main/mostrar_nome_da_branch_e_horas_no_terminal.md)
