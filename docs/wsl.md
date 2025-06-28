@@ -5,7 +5,7 @@
 se der erro precisa ativar
 
 - No Windows 11 por exemplo, abra o Painel de Controle antigo:
-> Painel de Controle\Programas\Programas e Recursos
+  > Painel de Controle\Programas\Programas e Recursos
 - Clique no Botão "Ativar ou desativar recursos do Windows".
 - Marque a opção "Subsistema do Windows para Linux" e clique no botão "OK".
 
