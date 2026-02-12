@@ -17,14 +17,7 @@ Use a propriedade `@page` dentro de `@media print` para aumentar o tamanho da fo
   <style>
     @media print {
       @page {
-        /* Aumenta o tamanho da página para caber todo o conteúdo */
-        size: 210mm 1000mm; /* Largura A4, mas com altura gigante */
-        margin: 0; /* Remove margens para ganhar espaço */
-      }
-      
-      body {
-        margin: 0;
-        padding: 0;
+        size: 210mm 1000mm; /* Largura A4, mas com altura gigante, Tamanho da página (largura altura) */
       }
     }
   </style>
