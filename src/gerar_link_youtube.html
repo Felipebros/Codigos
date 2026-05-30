@@ -4,119 +4,595 @@
 <head>
   <meta charset="UTF-8">
   <title>Gerador de Link do YouTube</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --border-color: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --primary-color: #3b82f6;
+      --primary-hover: #2563eb;
+      --ad-color: #f59e0b;
+      --ad-hover: #d97706;
+      --success-color: #10b981;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-separator {
+      color: var(--border-color);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 30px 0;
+      background: linear-gradient(135deg, #60a5fa, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+
+    .instructions-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .instructions-section h3 {
+      margin: 0 0 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #e2e8f0;
+    }
+
+    .instructions-section h3 span {
+      background: var(--primary-color);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .instructions-section img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin-top: 15px;
+    }
+
+    .input-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-section h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      color: #e2e8f0;
     }
 
     textarea {
       width: 100%;
-      height: 220px;
-      font-family: monospace;
-      padding: 10px;
+      height: 200px;
+      background-color: #0b0f19;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      padding: 15px;
       box-sizing: border-box;
-      margin-bottom: 10px;
       resize: vertical;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    button {
-      padding: 10px 15px;
-      background-color: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      user-select: none;
+    textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
     }
 
-    button:hover {
-      background-color: #219653;
-    }
-
-    .output {
+    .output-legacy {
       margin-top: 15px;
       display: flex;
       align-items: center;
       gap: 10px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px dashed var(--primary-color);
+      padding: 12px;
+      border-radius: 8px;
     }
 
     a.link {
       font-weight: bold;
       word-break: break-word;
-      color: #007bff;
+      color: #60a5fa;
       text-decoration: none;
     }
 
     a.link:hover {
       text-decoration: underline;
     }
+
+    .results-section {
+      margin-top: 30px;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .results-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: #334155;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: #475569;
+    }
+
+    .btn-success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .video-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-card:hover {
+      transform: translateY(-2px);
+      border-color: #4b5563;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (min-width: 576px) {
+      .video-card {
+        flex-direction: row;
+      }
+    }
+
+    .thumbnail-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #0b0f19;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    @media (min-width: 576px) {
+      .thumbnail-container {
+        width: 200px;
+        height: auto;
+        aspect-ratio: 16/9;
+        flex-shrink: 0;
+      }
+    }
+
+    .thumbnail-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .video-card:hover .thumbnail-img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-main {
+      background-color: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-ad {
+      background-color: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-detected {
+      background-color: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .video-id-display {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+      background: #0b0f19;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+      word-break: break-all;
+    }
+
+    .video-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--card-bg);
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
   </style>
 </head>
 
 <body>
-  <a href="https://felipebros.github.io/Codigos/">Página Inicial</a>
-  | <a href="./gerar_link_youtube.html">Site</a>
-  | <a href="https://github.com/Felipebros/Codigos/blob/main/src/gerar_link_youtube.html">Repositório</a>
+  <div class="container">
+    <div class="nav-links">
+      <a href="https://felipebros.github.io/Codigos/">Página Inicial</a>
+      <span class="nav-separator">|</span>
+      <a href="./gerar_link_youtube.html">Site</a>
+      <span class="nav-separator">|</span>
+      <a href="https://github.com/Felipebros/Codigos/blob/main/src/gerar_link_youtube.html">Repositório</a>
+    </div>
 
+    <h1>Gerador de Link do YouTube</h1>
 
-  <h1></h1>
+    <div class="instructions-section">
+      <h3><span>1</span> Clique com o botão direito no vídeo ou propaganda do YouTube</h3>
+      <h3><span>2</span> E clique em "Copiar informações de depuração"</h3>
+      <img src="images/copiar_informacoes_de_depuracao_youtube.png" alt="Instruções de como copiar informações de depuração do YouTube" />
+    </div>
 
-  <h3>1. Clique botão direito na propaganda ou vídeo do YouTube</h3>
-  <h3>2. E clique em "Copiar informações de depuração"</h3>
-  <img src="images/copiar_informacoes_de_depuracao_youtube.png" />
+    <div class="input-section">
+      <h2>3. Cole o JSON ou ID para gerar o link do YouTube</h2>
+      <textarea id="jsonInput" placeholder="Cole o JSON de depuração ou apenas o ID do vídeo aqui..." aria-label="Campo para colar JSON ou ID"></textarea>
+      
+      <div class="output-legacy" id="output" style="display:none">
+        <a id="youtubeLink" class="link" href="#" target="_blank" rel="noopener noreferrer"></a>
+        <button id="copyButton" class="btn btn-secondary" style="margin-left: 10px;" type="button">Copiar</button>
+      </div>
+    </div>
 
-  <h2>3. Cole o JSON ou ID para gerar o link do YouTube</h2>
-  <textarea id="jsonInput" placeholder="Cole o JSON ou apenas o ID aqui..."
-    aria-label="Campo para colar JSON ou ID"></textarea>
-
-  <div class="output" id="output" style="display:none">
-    <a id="youtubeLink" class="link" href="#" target="_blank" rel="noopener noreferrer"></a>
-    <button id="copyButton" type="button">Copiar</button>
-  </div>
+    <div class="results-section">
+      <div class="results-header" id="resultsHeader" style="display: none;">
+        <span class="results-title">Vídeos Encontrados</span>
+        <button id="copyAllButton" class="btn btn-secondary" type="button">Copiar Todos os Links</button>
+      </div>
+      <div class="cards-container" id="cardsContainer">
+        <div class="no-results" id="noResultsMessage">
+          Nenhum vídeo detectado. Cole as informações de depuração ou o ID acima para gerar os links.
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
     const jsonInput = document.getElementById("jsonInput");
     const outputDiv = document.getElementById("output");
     const youtubeLink = document.getElementById("youtubeLink");
-    let linkGerado = "";
+    const copyButton = document.getElementById("copyButton");
+    const resultsHeader = document.getElementById("resultsHeader");
+    const cardsContainer = document.getElementById("cardsContainer");
+    const noResultsMessage = document.getElementById("noResultsMessage");
+    const copyAllButton = document.getElementById("copyAllButton");
 
-    jsonInput.addEventListener("input", () => {
-      let addebug_videoId = "";
-      const input = jsonInput.value.trim();
+    let currentVideos = [];
+
+    function extractVideoIds(text) {
+      const results = [];
+      const trimmed = text.trim();
+      if (!trimmed) return results;
+
+      // 1. Try JSON parsing
       try {
-        const data = JSON.parse(input);
-        addebug_videoId = data.addebug_videoId;
-        if (!addebug_videoId) throw new Error("addebug_videoId ausente");
+        const data = JSON.parse(trimmed);
+        
+        // Check main video ID
+        if (data.debug_videoId) {
+          results.push({
+            id: data.debug_videoId,
+            type: 'main',
+            label: 'Vídeo Principal'
+          });
+        }
+        
+        // Check ad video ID
+        const adId = data.addebug_videoId || data.ad_debug_videoId;
+        if (adId) {
+          results.push({
+            id: adId,
+            type: 'ad',
+            label: 'Propaganda / Anúncio'
+          });
+        }
+        
+        if (results.length > 0) return results;
       } catch (e) {
-        addebug_videoId = input;
+        // Not valid JSON, continue to other methods
       }
 
-      if (addebug_videoId) {
-        linkGerado = `https://www.youtube.com/watch?v=${encodeURIComponent(addebug_videoId)}`;
-        youtubeLink.href = linkGerado;
-        youtubeLink.textContent = linkGerado;
-        outputDiv.style.display = "flex";
-      } else {
+      // 2. Try extracting from YouTube URLs in the text
+      const ytUrlRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/gi;
+      let match;
+      const foundUrls = new Set();
+      while ((match = ytUrlRegex.exec(trimmed)) !== null) {
+        const id = match[1];
+        if (!foundUrls.has(id)) {
+          foundUrls.add(id);
+          results.push({
+            id: id,
+            type: 'detected',
+            label: 'Vídeo Detectado'
+          });
+        }
+      }
+      if (results.length > 0) return results;
+
+      // 3. Fallback: If it's a single word (likely just the ID itself)
+      const cleanIdRegex = /^[a-zA-Z0-9_-]{11}$/;
+      if (cleanIdRegex.test(trimmed)) {
+        results.push({
+          id: trimmed,
+          type: 'detected',
+          label: 'Vídeo Detectado'
+        });
+      }
+
+      return results;
+    }
+
+    function renderResults(videos) {
+      currentVideos = videos;
+      
+      // Clear container but keep the reference to noResultsMessage
+      cardsContainer.innerHTML = "";
+
+      if (videos.length === 0) {
+        cardsContainer.appendChild(noResultsMessage);
+        noResultsMessage.style.display = "block";
+        resultsHeader.style.display = "none";
+        
+        // Reset legacy elements
         youtubeLink.href = "#";
         youtubeLink.textContent = "";
         outputDiv.style.display = "none";
+        return;
       }
+
+      noResultsMessage.style.display = "none";
+      resultsHeader.style.display = videos.length > 1 ? "flex" : "none";
+
+      // Populate legacy elements for compatibility (using the first detected video)
+      const firstVideoLink = `https://www.youtube.com/watch?v=${encodeURIComponent(videos[0].id)}`;
+      youtubeLink.href = firstVideoLink;
+      youtubeLink.textContent = firstVideoLink;
+      outputDiv.style.display = "flex";
+
+      // Render cards
+      videos.forEach(video => {
+        const videoLink = `https://www.youtube.com/watch?v=${video.id}`;
+        
+        const card = document.createElement("div");
+        card.className = "video-card";
+
+        const thumbContainer = document.createElement("div");
+        thumbContainer.className = "thumbnail-container";
+
+        const img = document.createElement("img");
+        img.className = "thumbnail-img";
+        img.src = `https://i.ytimg.com/vi/${video.id}/mqdefault.jpg`;
+        img.alt = `Miniatura do vídeo ${video.id}`;
+        img.onerror = () => {
+          img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90' viewBox='0 0 160 90'%3E%3Crect width='100%25' height='100%25' fill='%231e293b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2394a3b8' font-family='sans-serif' font-size='12'%3ESem Miniatura%3C/text%3E%3C/svg%3E";
+        };
+        thumbContainer.appendChild(img);
+
+        const content = document.createElement("div");
+        content.className = "card-content";
+
+        const header = document.createElement("div");
+        header.className = "card-header";
+
+        const badge = document.createElement("span");
+        badge.className = `badge badge-${video.type}`;
+        badge.textContent = video.label;
+        header.appendChild(badge);
+
+        const idDisplay = document.createElement("div");
+        idDisplay.className = "video-id-display";
+        idDisplay.textContent = `ID: ${video.id}`;
+
+        const actions = document.createElement("div");
+        actions.className = "video-actions";
+
+        const openBtn = document.createElement("a");
+        openBtn.className = "btn btn-primary";
+        openBtn.href = videoLink;
+        openBtn.target = "_blank";
+        openBtn.rel = "noopener noreferrer";
+        openBtn.textContent = "Abrir Vídeo";
+
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "btn btn-secondary";
+        copyBtn.type = "button";
+        copyBtn.textContent = "Copiar Link";
+        copyBtn.addEventListener("click", () => {
+          copyToClipboard(videoLink, copyBtn);
+        });
+
+        actions.appendChild(openBtn);
+        actions.appendChild(copyBtn);
+
+        content.appendChild(header);
+        content.appendChild(idDisplay);
+        content.appendChild(actions);
+
+        card.appendChild(thumbContainer);
+        card.appendChild(content);
+
+        cardsContainer.appendChild(card);
+      });
+    }
+
+    jsonInput.addEventListener("input", () => {
+      const text = jsonInput.value;
+      const videos = extractVideoIds(text);
+      renderResults(videos);
     });
 
-    document.getElementById("copyButton").addEventListener("click", function () {
+    copyButton.addEventListener("click", function () {
       const linkGerado = youtubeLink.href;
       if (!linkGerado || linkGerado === "#") return;
       copyToClipboard(linkGerado, this);
     });
 
+    copyAllButton.addEventListener("click", function () {
+      if (currentVideos.length === 0) return;
+      const allLinks = currentVideos.map(video => `https://www.youtube.com/watch?v=${video.id}`).join("\n");
+      copyToClipboard(allLinks, this);
+    });
+
     function copyToClipboard(text, buttonEl) {
       navigator.clipboard.writeText(text).then(function () {
         const originalText = buttonEl.textContent;
+        buttonEl.className = "btn btn-success";
         buttonEl.textContent = 'Copiado!';
         setTimeout(() => {
+          buttonEl.className = buttonEl.id === "copyButton" || buttonEl.id === "copyAllButton" ? "btn btn-secondary" : "btn btn-secondary";
           buttonEl.textContent = originalText;
         }, 2000);
       }).catch(err => alert("Erro ao copiar o link: " + err));
